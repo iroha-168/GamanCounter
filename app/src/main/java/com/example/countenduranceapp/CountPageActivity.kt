@@ -4,9 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.example.countenduranceapp.custom_view.ToolBarCustomViewDelegate
 import kotlinx.android.synthetic.main.activity_count_page.*
 
-class CountPageActivity : AppCompatActivity() {
+class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,4 +18,10 @@ class CountPageActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         setupWithNavController(nav_view, navController)
     }
+
+    //ToolBarCustomViewDelegate
+    override fun onClickedRightButton() {
+        
+    }
+
 }
