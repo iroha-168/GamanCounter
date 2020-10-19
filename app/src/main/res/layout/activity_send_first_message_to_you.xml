@@ -50,11 +50,11 @@
 
         <EditText
             android:id="@+id/editTextTextPersonName3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="例：自分、よく頑張った！"
+            android:hint="@string/text_first_message_hint"
             android:inputType="textPersonName" />
 
         <Button
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/orange"
-            android:text="送信"
+            android:text="@string/text_in_button_first_message"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

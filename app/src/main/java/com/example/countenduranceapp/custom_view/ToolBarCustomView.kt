@@ -11,7 +11,6 @@ import com.example.countenduranceapp.R
 
 interface ToolBarCustomViewDelegate {
     fun onClickedRightButton()
-    fun onClickedLeftButton()
 }
 
 class ToolBarCustomView : LinearLayout {
@@ -46,9 +45,6 @@ class ToolBarCustomView : LinearLayout {
         leftButton.visibility = if (isHideLeftButton) View.INVISIBLE else View.VISIBLE
         rightButton.visibility = if (isHideRightButton) View.INVISIBLE else View.VISIBLE
 
-        leftButton.setOnClickListener {
-            delegate?.onClickedLeftButton()
-        }
         rightButton.setOnClickListener {
             delegate?.onClickedRightButton()
         }

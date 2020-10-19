@@ -17,11 +17,14 @@ class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         setupWithNavController(nav_view, navController)
+        layout()
     }
 
-    //ToolBarCustomViewDelegate
     override fun onClickedRightButton() {
-        
+        TODO("Not yet implemented")
     }
 
+    private fun layout() {
+        //ToolBarCustomDelegate
+    }
 }
