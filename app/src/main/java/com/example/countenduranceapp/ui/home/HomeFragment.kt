@@ -18,7 +18,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
-        return rootView
 
         //ボタンがクリックされたらカウントを＋１する
         count_button.setOnClickListener {
@@ -34,9 +33,6 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
         }
-
-        //戻るボタンのリスナー
+        return rootView
     }
-
-
 }
