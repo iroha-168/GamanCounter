@@ -12,14 +12,14 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
+        android:text="0"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="100sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/count_button"
