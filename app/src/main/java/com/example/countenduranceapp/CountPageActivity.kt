@@ -20,10 +20,13 @@ class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         layout()
     }
 
+    //ToolBarCustomViewDelegate
     override fun onClickedRightButton() {
         TODO("Not yet implemented")
     }
 
+
+    //layoutの設定
     private fun layout() {
         //ToolBarCustomDelegate
     }

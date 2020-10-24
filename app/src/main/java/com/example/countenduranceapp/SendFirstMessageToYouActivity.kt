@@ -12,6 +12,7 @@ class SendFirstMessageToYouActivity : AppCompatActivity() {
 
         send_first_message_to_you_button.setOnClickListener {
             //メッセージをDBに保存
+
             //CountPageへ画面遷移
             val intent = Intent(this, CountPageActivity::class.java)
             startActivity(intent)

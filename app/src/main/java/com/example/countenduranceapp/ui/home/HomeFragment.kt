@@ -22,6 +22,7 @@ class HomeFragment : Fragment() {
 
         //ボタンがクリックされたらカウントを＋１する
         count_button.setOnClickListener {
+            print("get into count_button click listener")
             var num: Int = count_text.text.toString().toInt()
             num = num + 1
             count_text.text = num.toString()
