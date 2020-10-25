@@ -1,11 +1,16 @@
 package com.example.countenduranceapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.countenduranceapp.custom_view.ToolBarCustomViewDelegate
 import kotlinx.android.synthetic.main.activity_count_page.*
+import kotlinx.android.synthetic.main.activity_send_opinion_to_us.*
 
 class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
 
@@ -25,6 +30,26 @@ class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         TODO("Not yet implemented")
     }
 
+    //メニューを表示する
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.send_opinion_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item?.itemId) {
+            R.id.menu_send_opinion -> {
+                val url: String = "https://docs.google.com/forms/d/e/1FAIpQLSe3plWZsaf8nc_j1YUqUt9Zx_1znPA7-6XG-FNMR2xyzewLcg/viewform?usp=sf_link"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(url)
+                if (intent.resolveActivity(packageManager) != null)  {
+                    startActivity(intent)
+                }
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     //layoutの設定
     private fun layout() {
