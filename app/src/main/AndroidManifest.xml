@@ -13,6 +13,7 @@
             android:name=".CountPageActivity"
             android:label="@string/title_activity_count_page"></activity>
         <activity android:name=".SendFirstMessageToYouActivity"></activity>
+        <activity android:name=".CongratsBeforeActivity"></activity>
         <activity android:name=".RegisterUserAccountActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

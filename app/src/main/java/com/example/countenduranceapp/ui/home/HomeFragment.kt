@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.countenduranceapp.CongratsBeforeActivity
 import com.example.countenduranceapp.R
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -18,8 +20,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
+        return rootView
+    }
 
-        //ボタンがクリックされたらカウントを＋１する
+    //ボタンがクリックされたらカウントを＋１する
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         count_button.setOnClickListener {
             print("get into count_button click listener")
             var num: Int = count_text.text.toString().toInt()
@@ -33,6 +38,5 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
         }
-        return rootView
     }
 }
