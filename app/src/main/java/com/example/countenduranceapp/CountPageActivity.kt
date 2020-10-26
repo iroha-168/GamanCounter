@@ -10,7 +10,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.countenduranceapp.custom_view.ToolBarCustomViewDelegate
 import kotlinx.android.synthetic.main.activity_count_page.*
-import kotlinx.android.synthetic.main.activity_send_opinion_to_us.*
 
 class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
 
@@ -36,6 +35,7 @@ class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         return true
     }
 
+    //メニューがタップされた時の処理(アンケートフォームに飛ぶ)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId) {
             R.id.menu_send_opinion -> {
