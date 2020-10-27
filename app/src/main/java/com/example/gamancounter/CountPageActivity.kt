@@ -8,10 +8,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.example.gamancounter.custom_view.ToolBarCustomViewDelegate
 import kotlinx.android.synthetic.main.activity_count_page.*
 
-class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
+class CountPageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,12 +20,6 @@ class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         setupWithNavController(nav_view, navController)
-        layout()
-    }
-
-    //ToolBarCustomViewDelegate
-    override fun onClickedRightButton() {
-        TODO("Not yet implemented")
     }
 
     //メニューを表示する
@@ -49,10 +42,5 @@ class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    //layoutの設定
-    private fun layout() {
-        //ToolBarCustomDelegate
     }
 }

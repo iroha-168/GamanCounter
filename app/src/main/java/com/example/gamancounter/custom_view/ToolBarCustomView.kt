@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.example.gamancounter.R
 
 interface ToolBarCustomViewDelegate {
-    fun onClickedRightButton()
+    fun onClickedLeftButton()
 }
 
 class ToolBarCustomView : LinearLayout {
@@ -45,8 +45,8 @@ class ToolBarCustomView : LinearLayout {
         leftButton.visibility = if (isHideLeftButton) View.INVISIBLE else View.VISIBLE
         rightButton.visibility = if (isHideRightButton) View.INVISIBLE else View.VISIBLE
 
-        rightButton.setOnClickListener {
-            delegate?.onClickedRightButton()
+        leftButton.setOnClickListener {
+            delegate?.onClickedLeftButton()
         }
     }
 }
