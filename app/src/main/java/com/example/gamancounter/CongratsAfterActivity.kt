@@ -1,4 +1,4 @@
-package com.example.countenduranceapp
+package com.example.gamancounter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

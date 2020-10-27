@@ -1,11 +1,12 @@
-package com.example.countenduranceapp
+package com.example.gamancounter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class SendNextMessageActivity : AppCompatActivity() {
+class SendOpinionToUsActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_send_next_message)
+        setContentView(R.layout.activity_send_opinion_to_us)
     }
 }

@@ -1,20 +1,19 @@
-package com.example.countenduranceapp.ui.cheermail
+package com.example.gamancounter.ui.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.countenduranceapp.R
+import com.example.gamancounter.R
 
-class SendCheerMailFragment : Fragment() {
-
+class NotificationsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_send_cheermail, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_notifications, container, false)
         return rootView
     }
 }

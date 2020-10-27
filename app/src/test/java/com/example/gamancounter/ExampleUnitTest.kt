@@ -1,4 +1,4 @@
-package com.example.countenduranceapp
+package com.example.gamancounter
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.countenduranceapp
+package com.example.gamancounter
 
 import android.content.Intent
 import android.net.Uri
@@ -8,7 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.example.countenduranceapp.custom_view.ToolBarCustomViewDelegate
+import com.example.gamancounter.custom_view.ToolBarCustomViewDelegate
 import kotlinx.android.synthetic.main.activity_count_page.*
 
 class CountPageActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
