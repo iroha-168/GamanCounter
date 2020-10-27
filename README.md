@@ -1,1 +1,1 @@
-# MyOriginalApp
+# GamanCounter
