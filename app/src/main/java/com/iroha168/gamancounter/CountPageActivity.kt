@@ -32,13 +32,9 @@ class CountPageActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId) {
             R.id.menu_send_opinion -> {
-                val url: String = "https://docs.google.com/forms/d/e/1FAIpQLSe3plWZsaf8nc_j1YUqUt9Zx_1znPA7-6XG-FNMR2xyzewLcg/viewform?usp=sf_link"
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(url)
-                if (intent.resolveActivity(packageManager) != null)  {
-                    startActivity(intent)
-                }
-                return true
+               //SendOpinionToUsActivityに画面遷移
+                val intent = Intent(this, SendOpinionToUsActivity::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)

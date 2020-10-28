@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.iroha168.gamancounter">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,6 +13,7 @@
         <activity
             android:name="com.iroha168.gamancounter.CountPageActivity"
             android:label="@string/title_activity_count_page"></activity>
+        <activity android:name=".SendOpinionToUsActivity"></activity>
         <activity android:name="com.iroha168.gamancounter.SendFirstMessageToYouActivity"></activity>
         <activity android:name="com.iroha168.gamancounter.CongratsBeforeActivity"></activity>
         <activity android:name="com.iroha168.gamancounter.RegisterUserAccountActivity">
