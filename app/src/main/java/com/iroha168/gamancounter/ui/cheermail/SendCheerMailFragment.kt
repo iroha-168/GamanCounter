@@ -1,11 +1,11 @@
-package com.example.gamancounter.ui.cheermail
+package com.iroha168.gamancounter.ui.cheermail
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.gamancounter.R
+import com.iroha168.gamancounter.R
 
 class SendCheerMailFragment : Fragment() {
 

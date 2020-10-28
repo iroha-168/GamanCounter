@@ -1,4 +1,4 @@
-package com.example.gamancounter.ui.home
+package com.iroha168.gamancounter.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.gamancounter.CongratsBeforeActivity
-import com.example.gamancounter.R
+import com.iroha168.gamancounter.CongratsBeforeActivity
+import com.iroha168.gamancounter.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {

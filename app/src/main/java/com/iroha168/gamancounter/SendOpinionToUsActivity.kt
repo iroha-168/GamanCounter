@@ -1,11 +1,11 @@
-package com.example.gamancounter
+package com.iroha168.gamancounter
 
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gamancounter.custom_view.ToolBarCustomView
-import com.example.gamancounter.custom_view.ToolBarCustomViewDelegate
+import com.iroha168.gamancounter.custom_view.ToolBarCustomView
+import com.iroha168.gamancounter.custom_view.ToolBarCustomViewDelegate
 
 class SendOpinionToUsActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
 

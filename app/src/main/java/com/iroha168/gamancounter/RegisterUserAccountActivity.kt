@@ -1,4 +1,4 @@
-package com.example.gamancounter
+package com.iroha168.gamancounter
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

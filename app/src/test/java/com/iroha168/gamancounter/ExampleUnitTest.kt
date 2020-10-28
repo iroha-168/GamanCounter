@@ -1,4 +1,4 @@
-package com.example.gamancounter
+package com.iroha168.gamancounter
 
 import org.junit.Test
 

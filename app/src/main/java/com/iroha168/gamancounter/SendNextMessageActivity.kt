@@ -1,11 +1,11 @@
-package com.example.gamancounter
+package com.iroha168.gamancounter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class CongratsBeforeActivity : AppCompatActivity() {
+class SendNextMessageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_congrats_before)
+        setContentView(R.layout.activity_send_next_message)
     }
 }

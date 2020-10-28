@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gamancounter">
+    package="com.iroha168.gamancounter">
 
     <application
         android:allowBackup="true"
@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.gamancounter.CountPageActivity"
+            android:name="com.iroha168.gamancounter.CountPageActivity"
             android:label="@string/title_activity_count_page"></activity>
-        <activity android:name="com.example.gamancounter.SendFirstMessageToYouActivity"></activity>
-        <activity android:name="com.example.gamancounter.CongratsBeforeActivity"></activity>
-        <activity android:name="com.example.gamancounter.RegisterUserAccountActivity">
+        <activity android:name="com.iroha168.gamancounter.SendFirstMessageToYouActivity"></activity>
+        <activity android:name="com.iroha168.gamancounter.CongratsBeforeActivity"></activity>
+        <activity android:name="com.iroha168.gamancounter.RegisterUserAccountActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

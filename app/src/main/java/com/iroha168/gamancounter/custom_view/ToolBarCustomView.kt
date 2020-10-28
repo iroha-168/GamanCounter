@@ -1,4 +1,4 @@
-package com.example.gamancounter.custom_view
+package com.iroha168.gamancounter.custom_view
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.gamancounter.R
+import com.iroha168.gamancounter.R
 
 interface ToolBarCustomViewDelegate {
     fun onClickedLeftButton()
