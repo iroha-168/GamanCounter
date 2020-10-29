@@ -39,11 +39,9 @@ class ToolBarCustomView : LinearLayout {
     fun configure(titleText: String, isHideLeftButton: Boolean, isHideRightButton: Boolean) {
         val titleTextView: TextView = findViewById(R.id.toolbar_title_text_view)
         val leftButton: ImageButton = findViewById(R.id.left_button)
-        val rightButton: ImageButton = findViewById(R.id.right_button)
 
         titleTextView.text = titleText
         leftButton.visibility = if (isHideLeftButton) View.INVISIBLE else View.VISIBLE
-        rightButton.visibility = if (isHideRightButton) View.INVISIBLE else View.VISIBLE
 
         leftButton.setOnClickListener {
             delegate?.onClickedLeftButton()

@@ -12,8 +12,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.iroha168.gamancounter.CountPageActivity"
-            android:label="@string/title_activity_count_page"></activity>
-        <activity android:name=".SendOpinionToUsActivity"></activity>
+            android:label="@string/title_activity_count_page">
+        </activity>
+        <activity android:name="com.iroha168.gamancounter.SendOpinionToUsActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
         <activity android:name="com.iroha168.gamancounter.SendFirstMessageToYouActivity"></activity>
         <activity android:name="com.iroha168.gamancounter.CongratsBeforeActivity"></activity>
         <activity android:name="com.iroha168.gamancounter.RegisterUserAccountActivity">

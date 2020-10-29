@@ -11,25 +11,20 @@
         android:id="@+id/left_button"
         android:layout_width="50dp"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:tint="@color/colorPrimary"
+        android:background="@color/colorPrimary"
+        android:tint="@android:color/white"
         app:srcCompat="@drawable/abc_vector_test" />
 
     <TextView
         android:id="@+id/toolbar_title_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="TextView"
-        android:textColor="@color/colorPrimary"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 
-    <ImageButton
-        android:id="@+id/right_button"
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:tint="@color/colorPrimary"
-        app:srcCompat="@drawable/ic_baseline_menu_24" />
 </LinearLayout>
