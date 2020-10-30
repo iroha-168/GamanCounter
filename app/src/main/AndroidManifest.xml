@@ -18,6 +18,7 @@
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity android:name="com.iroha168.gamancounter.SendFirstMessageToYouActivity"></activity>
+        <activity android:name="com.iroha168.gamancounter.CongratsAfterActivity"></activity>
         <activity android:name="com.iroha168.gamancounter.CongratsBeforeActivity"></activity>
         <activity android:name="com.iroha168.gamancounter.RegisterUserAccountActivity">
             <intent-filter>

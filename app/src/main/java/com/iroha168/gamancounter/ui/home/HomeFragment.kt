@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
             //numが10の倍数の時CongratsBeforeに画面遷移
             if (num % 10 == 0) {
                 val intent = Intent(context, CongratsBeforeActivity::class.java)
+                intent.putExtra("HowMany", num)
                 startActivity(intent)
             }
         }
