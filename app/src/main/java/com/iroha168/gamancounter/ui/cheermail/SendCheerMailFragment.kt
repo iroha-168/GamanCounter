@@ -27,9 +27,9 @@ class SendCheerMailFragment : Fragment() {
             //入力されたメッセージをDBに登録する
 
             //画面遷移とトースト
+            Toast.makeText(context, "送信しました", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, CountPageActivity::class.java);
             startActivity(intent)
-            Toast.makeText(context, "送信しました", Toast.LENGTH_SHORT).show()
         }
     }
 }
