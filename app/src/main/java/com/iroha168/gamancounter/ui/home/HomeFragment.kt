@@ -2,6 +2,7 @@ package com.iroha168.gamancounter.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,13 @@ class HomeFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
         return rootView
+
+        //SharedPreferenceで保存した値を取り出す
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        val message = pref.getString("message", "No set message")
+        val goal = pref.getString("goal", "No set goal")
+        print(message)
+        print(goal)
     }
 
     //ボタンがクリックされたらカウントを＋１する
@@ -30,6 +38,7 @@ class HomeFragment : Fragment() {
             count_text.text = num.toString()
             //トーストを作成する
             Toast.makeText(context, "がんばってる！", Toast.LENGTH_SHORT).show()
+
             //numが10の倍数の時CongratsBeforeに画面遷移
             if (num % 10 == 0) {
                 val intent = Intent(context, CongratsBeforeActivity::class.java)

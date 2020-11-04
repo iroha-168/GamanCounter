@@ -14,7 +14,7 @@ class RegisterUserAccountActivity : AppCompatActivity() {
             //ユーザ固有のIDを自動生成
             //ニックネームと生成したIDをDBに保存
             //SendFirstMessageToYouへ画面遷移
-            val intent = Intent(this, SendFirstMessageToYouActivity::class.java)
+            val intent = Intent(this, SetGoalAndMessageActivity::class.java)
             startActivity(intent)
         }
     }
