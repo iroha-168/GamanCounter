@@ -13,20 +13,22 @@ import com.iroha168.gamancounter.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
+    var goal: String? = null
+    var message: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
-        return rootView
 
         //SharedPreferenceで保存した値を取り出す
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
-        val message = pref.getString("message", "No set message")
-        val goal = pref.getString("goal", "No set goal")
-        print(message)
-        print(goal)
+        message = pref.getString("message", "No set message")
+        goal = pref.getString("goal", "No set goal")
+
+        return rootView
     }
 
     //ボタンがクリックされたらカウントを＋１する
@@ -40,9 +42,10 @@ class HomeFragment : Fragment() {
             Toast.makeText(context, "がんばってる！", Toast.LENGTH_SHORT).show()
 
             //numが10の倍数の時CongratsBeforeに画面遷移
-            if (num % 10 == 0) {
+            if (num.toString() == goal) {
                 val intent = Intent(context, CongratsBeforeActivity::class.java)
-                intent.putExtra("HowMany", num)
+                intent.putExtra("Goal", goal)
+                intent.putExtra("Message", message)
                 startActivity(intent)
             }
         }
