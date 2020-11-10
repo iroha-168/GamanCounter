@@ -17,16 +17,15 @@
         <activity android:name="com.iroha168.gamancounter.SendOpinionToUsActivity"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name="com.iroha168.gamancounter.SetGoalAndMessageActivity"></activity>
-        <activity android:name="com.iroha168.gamancounter.CongratsAfterActivity"></activity>
-        <activity android:name="com.iroha168.gamancounter.CongratsBeforeActivity"></activity>
         <activity android:name="com.iroha168.gamancounter.RegisterUserAccountActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.iroha168.gamancounter.SetGoalAndMessageActivity"></activity>
+        <activity android:name="com.iroha168.gamancounter.CongratsAfterActivity"></activity>
+        <activity android:name="com.iroha168.gamancounter.CongratsBeforeActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
