@@ -6,6 +6,9 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
+    viewBinding {
+        enabled = true
+    }
 
     defaultConfig {
         vectorDrawables.useSupportLibrary = true

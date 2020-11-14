@@ -1,12 +1,11 @@
 package com.iroha168.gamancounter
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.iroha168.gamancounter.custom_view.ToolBarCustomView
-import com.iroha168.gamancounter.custom_view.ToolBarCustomViewDelegate
+import com.iroha168.gamancounter.view.ToolBarCustomView
+import com.iroha168.gamancounter.view.ToolBarCustomViewDelegate
 import kotlinx.android.synthetic.main.activity_send_opinion_to_us.*
 
 class SendOpinionToUsActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
