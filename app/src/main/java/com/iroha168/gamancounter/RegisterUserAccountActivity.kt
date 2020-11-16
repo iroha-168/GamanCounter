@@ -1,20 +1,20 @@
 package com.iroha168.gamancounter
 
 import android.content.Intent
-import android.graphics.ColorSpace
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import com.iroha168.gamancounter.databinding.ActivityRegisterUserAccountBinding
-import com.iroha168.gamancounter.repository.Repository
-import kotlinx.android.synthetic.main.activity_register_user_account.*
+import com.iroha168.gamancounter.repository.UserInfoRepository
+import com.iroha168.gamancounter.view.model.UserInfoViewModel
 import java.util.*
 
 class RegisterUserAccountActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterUserAccountBinding
-    val viewModel = com.iroha168.gamancounter.view.model.ViewModel()
+    private val viewModel: UserInfoViewModel by lazy {
+        UserInfoViewModel()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class RegisterUserAccountActivity : AppCompatActivity() {
             val userId = UUID.randomUUID().toString()
 
             //ニックネームと生成したIDをDBに保存
-            viewModel.saveUserNameAndId(userName, userId, repository = Repository())
+            viewModel.saveUserNameAndId(userName, userId, repository = UserInfoRepository())
 
             //SendFirstMessageToYouへ画面遷移
             val intent = Intent(this, SetGoalAndMessageActivity::class.java)
