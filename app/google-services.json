@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "630534810534",
-    "firebase_url": "https://gamancounter.firebaseio.com",
-    "project_id": "gamancounter",
-    "storage_bucket": "gamancounter.appspot.com"
+    "project_number": "1020518192601",
+    "firebase_url": "https://gamancounter-8546c.firebaseio.com",
+    "project_id": "gamancounter-8546c",
+    "storage_bucket": "gamancounter-8546c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:630534810534:android:501e9700164cfbb375bd67",
+        "mobilesdk_app_id": "1:1020518192601:android:8eb9b111023abf727b75c8",
         "android_client_info": {
           "package_name": "com.iroha168.gamancounter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "630534810534-50mvamd34ifsbhpd0641idar49r31q09.apps.googleusercontent.com",
+          "client_id": "1020518192601-fje1u7dshpd7dh2815ugtbra1gopjeq3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.iroha168.gamancounter",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "630534810534-sc6i0l3nbsm3tmee562bde91dh99j1gi.apps.googleusercontent.com",
+          "client_id": "1020518192601-934cfl5kuqid8osu9j58amtmdcu28uiv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDznMuveFy3bkHPO1coiscnjx52L_08BGQ"
+          "current_key": "AIzaSyBBMHewvTTabAJjWMJ1m6whqimtf2jsC2A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "630534810534-sc6i0l3nbsm3tmee562bde91dh99j1gi.apps.googleusercontent.com",
+              "client_id": "1020518192601-934cfl5kuqid8osu9j58amtmdcu28uiv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
