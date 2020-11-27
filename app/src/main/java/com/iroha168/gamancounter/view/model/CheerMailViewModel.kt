@@ -9,7 +9,7 @@ class CheerMailViewModel {
 
 
 
-    
+
     // ユーザー名とチアメールを取得
     private val _postsData = MutableLiveData<List<SaveCheerMail>>()
     val postsData: LiveData<List<SaveCheerMail>> = _postsData
