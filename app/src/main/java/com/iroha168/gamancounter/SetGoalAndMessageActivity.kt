@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_set_goal_and_message_activity.*
 class SetGoalAndMessageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_set_goal_and_message_activity)
+        setContentView(R.layout.activity_set_goal_and_message)
 
         send_goal_and_message_button.setOnClickListener {
             //editTextに入力された文字列を取得
