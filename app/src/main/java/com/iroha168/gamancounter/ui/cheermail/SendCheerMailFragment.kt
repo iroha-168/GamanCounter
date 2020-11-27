@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import com.iroha168.gamancounter.CountPageActivity
 import com.iroha168.gamancounter.databinding.FragmentSendCheermailBinding
 import com.iroha168.gamancounter.view.model.CheerMailViewModel
+import com.iroha168.gamancounter.view.model.SaveCheerMail
 
 class SendCheerMailFragment : Fragment() {
     private var _binding: FragmentSendCheermailBinding? = null
@@ -47,7 +48,9 @@ class SendCheerMailFragment : Fragment() {
     }
 
     private fun callCheerMailViewModel() {
-        // userNameを受け取る
+        var userName: List<SaveCheerMail>
+        // TODO: 今ログインしている(チアメールを送ろうとしている)userのuserNameを受け取る
+
         // cheerMailを受け取る
         val cheerMail: String = binding.sendCheerMailEditText.text.toString()
         viewModel.uploadCheerMail(userName, cheerMail)

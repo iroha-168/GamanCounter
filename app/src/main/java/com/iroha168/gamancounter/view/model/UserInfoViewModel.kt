@@ -1,31 +1,43 @@
 package com.iroha168.gamancounter.view.model
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iroha168.gamancounter.repository.UserInfoRepository
-import com.jakewharton.rxrelay3.PublishRelay
-import kotlinx.coroutines.async
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import kotlinx.coroutines.withContext
 
 class UserInfoViewModel : ViewModel() {
-    private val firestoreSaveUserSuccess:PublishRelay<FirestoreSuccess> = PublishRelay.create()
-
-    data class FirestoreSuccess(
-        val data: String
-    )
-    fun saveUserNameAndId(userName: String, userId: String, repository: UserInfoRepository = UserInfoRepository()) {
+    // ユーザー名とユーザーIDを保存
+    fun saveUserNameAndId(userName: String, userId: String) {
         viewModelScope.launch {
             try {
-                val task = async { repository.saveUser(userName, userId) }.await()
-                if (task.isSuccessful) {
-                    val result = FirestoreSuccess("")
-                    firestoreSaveUserSuccess.accept(result)
+                val task = withContext(Dispatchers.Default) {
+                    repository.saveUser(
+                        userName,
+                        userId
+                    )
                 }
             } catch (e: Exception) {
                 Log.d("ERROR", e.toString())
             }
+        }
+    }
+
+    // ユーザー名とユーザーIDを取得
+    private val _postsData = MutableLiveData<List<SaveUserInfo>>()
+    val postsData: LiveData<List<SaveUserInfo>> = _postsData
+
+    private val repository = UserInfoRepository()
+
+    fun loadUserNameAndId() = viewModelScope.launch {
+        try {
+            val posts = withContext(Dispatchers.Default) { repository.getUser() }
+        } catch (e: Exception) {
+            Log.d("ERROR", e.toString())
         }
     }
 }

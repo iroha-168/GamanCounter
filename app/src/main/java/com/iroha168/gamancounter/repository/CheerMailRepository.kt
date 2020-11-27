@@ -2,9 +2,7 @@ package com.iroha168.gamancounter.repository
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 import com.iroha168.gamancounter.view.model.SaveCheerMail
-import com.iroha168.gamancounter.view.model.SaveUserInfo
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
