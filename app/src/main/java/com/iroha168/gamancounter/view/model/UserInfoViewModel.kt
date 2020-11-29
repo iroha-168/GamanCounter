@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class UserInfoViewModel : ViewModel() {
+    private val repository = UserInfoRepository()
+
     // ユーザー名とユーザーIDを保存
     fun saveUserNameAndId(userName: String, userId: String) {
         viewModelScope.launch {
@@ -30,8 +32,6 @@ class UserInfoViewModel : ViewModel() {
     // ユーザー名とユーザーIDを取得
     private val _postsData = MutableLiveData<List<SaveUserInfo>>()
     val postsData: LiveData<List<SaveUserInfo>> = _postsData
-
-    private val repository = UserInfoRepository()
 
     fun loadUserNameAndId() = viewModelScope.launch {
         try {

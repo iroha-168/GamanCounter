@@ -31,7 +31,7 @@ class RegisterUserAccountActivity : AppCompatActivity() {
             val userId = UUID.randomUUID().toString()
 
             //ニックネームと生成したIDをDBに保存
-            viewModel.saveUserNameAndId(userName, userId, repository = UserInfoRepository())
+            viewModel.saveUserNameAndId(userName, userId)
 
             //SendFirstMessageToYouへ画面遷移
             val intent = Intent(this, SetGoalAndMessageActivity::class.java)

@@ -23,3 +23,4 @@ class CheerMailRepository {
 }
 
 // 保存したチアメールを取得
+// TODO: チアメールとユーザー名を取得する処理をかく
