@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.CountPageActivity
@@ -39,7 +40,7 @@ class SendCheerMailFragment : Fragment() {
             binding.sendCheerMailButton.setOnClickListener {
                 auth = Firebase.auth
                 //入力されたメッセージをDBに登録する
-                callCheerMailViewModel()
+                callCheerMailViewModel(user)
                 //画面遷移とトースト
                 Toast.makeText(context, "送信しました", Toast.LENGTH_SHORT).show()
                 val intent = Intent(context, CountPageActivity::class.java)
@@ -53,16 +54,13 @@ class SendCheerMailFragment : Fragment() {
         _binding = null
     }
 
-    private fun callCheerMailViewModel() {
+    private fun callCheerMailViewModel(user: FirebaseUser) {
         // 今ログインしている(チアメールを送ろうとしている)userのuserNameを受け取る
-        val user = Firebase.auth.currentUser
-        user?.let {
-            val userName = user.displayName
-            Log.d("NAME", userName.toString())
-            // cheerMailを受け取る
-            val cheerMail: String = binding.sendCheerMailEditText.text.toString()
-            // ユーザー名とユーザー情報をFirestoreに保存する関数をviewModelから呼び出す
-            viewModel.saveCheerMail(userName, cheerMail)
-        }
+        val userName = user.displayName
+        Log.d("NAME", userName.toString())
+        // cheerMailを受け取る
+        val cheerMail: String = binding.sendCheerMailEditText.text.toString()
+        // ユーザー名とユーザー情報をFirestoreに保存する関数をviewModelから呼び出す
+        viewModel.saveCheerMail(userName, cheerMail)
     }
 }
