@@ -1,0 +1,60 @@
+[TopActivity]
+ログインチェック(画面無し)
+--
+初回ログイン
+==> RegisterUserAccountActivity
+２回目以降のログイン
+==> HomeFragment
+
+[RegisterUserAccountActivity]
+UserIDとpassword入力欄が表示
+--
+登録ボタンを押す
+==> SetGoalAndMessageActivity
+
+[SetGoalAndMessageActivity]
+目標のがまんカウントと達成した時のメッセージ入力
+--
+送信ボタンを押す
+==> CountPageActivity
+
+[CountPageActivity]
+ボトムナビゲーションバー表示
+--
+Homeをクリック
+==> HomeFragment
+Send CheerMailをクリック
+==> SendCheerMailFragment
+Notificationsをクリック
+==> NotificationsFragment
+
+[SendCheerMailFragment]
+他のユーザーにメッセージを送る
+--
+送信ボタンを押す
+==> HomeFragment
+
+[NotificationsFragment]
+受取ったチアメールを表示
+
+
+[HomeFragment]
+がまんカウントとボタン表示
+--
+がまんしたい時にボタンをクリック(目標達成で画面遷移)
+==> CongratsBeforeActivity
+
+[CongratsBeforeActivity]
+過去の自分からのメッセージが届いていることを表示
+--
+開封ボタンをクリック
+==> CongratsAfterActivity
+
+[CongratsAfterActivity]
+メッセージが表示される
+--
+ボタンをクリック
+==> SetGoalAndMessageActivity
+
+
+

@@ -55,7 +55,7 @@ class SendCheerMailFragment : Fragment() {
     }
 
     private fun callCheerMailViewModel(user: FirebaseUser) {
-        // 今ログインしている(チアメールを送ろうとしている)userのuserNameを受け取る
+        // TODO: 今ログインしている(チアメールを送ろうとしている)userのuserNameを受け取る
         val userName = user.displayName
         Log.d("NAME", userName.toString())
         // cheerMailを受け取る
