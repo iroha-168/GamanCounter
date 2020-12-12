@@ -19,7 +19,7 @@
         <activity android:name="com.iroha168.gamancounter.SendOpinionToUsActivity"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name="com.iroha168.gamancounter.RegisterUserAccountActivity">
+        <activity android:name="com.iroha168.gamancounter.AuthenticationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

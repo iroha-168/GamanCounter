@@ -10,10 +10,10 @@ import kotlin.coroutines.suspendCoroutine
 
 class UserInfoRepository {
     // ユーザー情報を保存
-    suspend fun saveUser(userName: String?, userId: String): Task<Void> {
+    suspend fun saveUser(userId: String, userName: String, userMail: String, userPass: String): Task<Void> {
         return suspendCoroutine { cont ->
             val db = FirebaseFirestore.getInstance()
-            val saveUserInfo = SaveUserInfo(userName, userId)
+            val saveUserInfo = SaveUserInfo(userId, userName, userMail, userPass)
             val task = db.collection("userInfo")
                 .document()
                 .set(saveUserInfo)

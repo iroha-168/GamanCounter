@@ -14,13 +14,15 @@ class UserInfoViewModel : ViewModel() {
     private val repository = UserInfoRepository()
 
     // ユーザー名とユーザーIDを保存
-    fun saveUserNameAndId(userName: String, userId: String) {
+    fun saveUserNameAndId(userId: String, userName: String, userMail: String, userPass: String) {
         viewModelScope.launch {
             try {
                 val task = withContext(Dispatchers.Default) {
                     repository.saveUser(
+                        userId,
                         userName,
-                        userId
+                        userMail,
+                        userPass
                     )
                 }
             } catch (e: Exception) {
