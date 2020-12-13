@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 
+# google-services.json非表示
+app/google-services.json
