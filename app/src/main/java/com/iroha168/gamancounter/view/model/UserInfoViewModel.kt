@@ -11,15 +11,19 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class UserInfoViewModel : ViewModel() {
+    private val _getData = MutableLiveData<List<SaveUserInfo>>()
+    val getData: LiveData<List<SaveUserInfo>> = _getData
+
     private val repository = UserInfoRepository()
 
     // ユーザー名とユーザーIDを保存
-    fun saveUserNameAndId(userId: String, userName: String, userMail: String, userPass: String) {
+    fun saveUserNameAndId(uid: String?, userName: String, userMail: String, userPass: String) {
         viewModelScope.launch {
             try {
+                // TODO: task実質使ってないので消す
                 val task = withContext(Dispatchers.Default) {
                     repository.saveUser(
-                        userId,
+                        uid,
                         userName,
                         userMail,
                         userPass
@@ -31,13 +35,11 @@ class UserInfoViewModel : ViewModel() {
         }
     }
 
-    // ユーザー名とユーザーIDを取得
-    private val _postsData = MutableLiveData<List<SaveUserInfo>>()
-    val postsData: LiveData<List<SaveUserInfo>> = _postsData
-
-    fun loadUserNameAndId() = viewModelScope.launch {
+    // uidからユーザー名を取得
+    fun loadUserNameAndId(uid: String?) = viewModelScope.launch {
         try {
-            val posts = withContext(Dispatchers.Default) { repository.getUser() }
+            val userData = withContext(Dispatchers.Default) { repository.getUser(uid) }
+            _getData.value = userData
         } catch (e: Exception) {
             Log.d("ERROR", e.toString())
         }

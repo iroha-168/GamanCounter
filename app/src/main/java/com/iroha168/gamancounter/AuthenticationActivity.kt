@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
 import com.iroha168.gamancounter.view.model.UserInfoViewModel
 import java.util.*
@@ -72,10 +74,11 @@ class AuthenticationActivity : AppCompatActivity() {
                         "Sign-up is successful！",
                         Toast.LENGTH_SHORT
                     ).show()
-                    // ユーザ固有のIDを自動生成
-                    val userId = UUID.randomUUID().toString()
+                    // user登録時に自動生成されるuidを取得
+                    val user = Firebase.auth.currentUser
+                    val uid = user?.uid
                     // ユーザー情報をDBに保存
-                    viewModel.saveUserNameAndId(userId, userName, email, password)
+                    viewModel.saveUserNameAndId(uid, userName, email, password)
                     // カウント画面に画面遷移
                     val intent = Intent(this, CountPageActivity::class.java)
                     startActivity(intent)

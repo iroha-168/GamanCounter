@@ -10,10 +10,10 @@ import kotlin.coroutines.suspendCoroutine
 
 class UserInfoRepository {
     // ユーザー情報を保存
-    suspend fun saveUser(userId: String, userName: String, userMail: String, userPass: String): Task<Void> {
+    suspend fun saveUser(uid: String?, userName: String, userMail: String, userPass: String): Task<Void> {
         return suspendCoroutine { cont ->
             val db = FirebaseFirestore.getInstance()
-            val saveUserInfo = SaveUserInfo(userId, userName, userMail, userPass)
+            val saveUserInfo = SaveUserInfo(uid, userName, userMail, userPass)
             val task = db.collection("userInfo")
                 .document()
                 .set(saveUserInfo)
@@ -24,18 +24,17 @@ class UserInfoRepository {
         }
     }
 
-    // ユーザー情報を取得
-    suspend fun getUser(): Task<QuerySnapshot> {
+    // 引数のuidと一致するユーザー名を取得
+    suspend fun getUser(uid: String?): List<SaveUserInfo> {
         return suspendCoroutine { cont ->
             val db = FirebaseFirestore.getInstance()
             val task = db.collection("userInfo")
-                .orderBy(SaveUserInfo::userName.name)
-                .limit(20)
+                .whereEqualTo("uid", uid)
                 .get()
             task.addOnCompleteListener {
-                val resultList = task.result?.toObjects(SaveUserInfo::class.java)
-                Log.d("SUCCESS", "getUser() is successful")
-                cont.resume(it)
+                // FIXME: !!使って無理やり解決してしまったけどいいのか
+                val resultList = task.result!!.toObjects(SaveUserInfo::class.java)
+                cont.resume(resultList)
             }
         }
     }
