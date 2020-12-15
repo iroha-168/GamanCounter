@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
 import com.iroha168.gamancounter.view.model.UserInfoViewModel
-import java.util.*
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -48,13 +47,25 @@ class AuthenticationActivity : AppCompatActivity() {
                         Toast.makeText(
                             baseContext,
                             "Welcome back, ${userName}!",
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_LONG
                         ).show()
                         val intent = Intent(this, CountPageActivity::class.java)
                         startActivity(intent)
                     } else {
-                        Log.d("TAG", "Sign-in is failed")
-                        signUp()
+                        if (task.exception != null) {
+                            Log.d("TAG", task.exception!!.javaClass.canonicalName)  // task.exceptionのクラス名を確認
+                            val errorMessage = when (task.exception) {
+                                is FirebaseAuthInvalidCredentialsException -> "パスワードが違います"
+                                is FirebaseAuthInvalidUserException -> "メールアドレスが違います"
+                                else -> "ログインに失敗しました"
+                            }
+
+                            Toast.makeText(
+                                baseContext,
+                                errorMessage,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
                 }
         }
@@ -83,7 +94,13 @@ class AuthenticationActivity : AppCompatActivity() {
                     val intent = Intent(this, CountPageActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Log.d("TAG", "sign-up is failed")
+                    Log.d("TAG", "failed in sign-up")
+
+                    Toast.makeText(
+                        baseContext,
+                        "ユーザー登録に失敗しました",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
     }
