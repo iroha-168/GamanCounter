@@ -19,7 +19,7 @@ class UserInfoViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 // TODO: task実質使ってないので消す
-                val task = withContext(Dispatchers.Default) {
+                withContext(Dispatchers.Default) {
                     repository.saveUser(
                         uid,
                         userName,

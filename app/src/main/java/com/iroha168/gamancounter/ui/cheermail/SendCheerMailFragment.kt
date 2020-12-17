@@ -2,6 +2,8 @@ package com.iroha168.gamancounter.ui.cheermail
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,8 @@ import com.iroha168.gamancounter.databinding.FragmentSendCheermailBinding
 import com.iroha168.gamancounter.repository.UserInfoRepository
 import com.iroha168.gamancounter.view.model.CheerMailViewModel
 import com.iroha168.gamancounter.view.model.UserInfoViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class SendCheerMailFragment : Fragment() {
@@ -25,7 +29,6 @@ class SendCheerMailFragment : Fragment() {
         get() = _binding!!
 
     private val cheerMailViewModel: CheerMailViewModel by viewModels()
-    private val userInfoViewModel: UserInfoViewModel by viewModels()
     private val userInfoRepository = UserInfoRepository()
 
     private lateinit var auth: FirebaseAuth
@@ -40,19 +43,22 @@ class SendCheerMailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        auth = FirebaseAuth.getInstance()
         binding.sendCheerMailButton.setOnClickListener {
-            auth = FirebaseAuth.getInstance()
-            // uidからユーザー名を取得する
-            val userName = getUserName()
-            Log.d("TAG", userName) // CHECK
-            // 入力されたメッセージを取得
-            val cheerMail: String = binding.sendCheerMailEditText.text.toString()
-            // 入力されたメッセージとユーザー名をDBに登録する
-            cheerMailViewModel.saveCheerMail(userName, cheerMail)
-            // 画面遷移とトースト
-            Toast.makeText(context, "送信しました", Toast.LENGTH_SHORT).show()
-            val intent = Intent(context, CountPageActivity::class.java)
-            startActivity(intent)
+            val mainHandler = Handler(Looper.getMainLooper())   // メインスレッドに紐づくLooperを取得
+            GlobalScope.launch {
+                val userName = getUserName()
+                Log.d("TAG", userName)  // CHECK
+                val cheerMail: String = binding.sendCheerMailEditText.text.toString()
+                cheerMailViewModel.saveCheerMail(userName, cheerMail)
+            }
+
+            mainHandler.post {
+                // 画面遷移とトースト
+                Toast.makeText(context, "送信しました", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, CountPageActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -61,14 +67,12 @@ class SendCheerMailFragment : Fragment() {
         _binding = null
     }
 
-    private fun getUserName(): String {
-        // 現在ログインしているユーザーのuidを取得
+    // uidからユーザー名を取得する
+    private fun getUserName() : String {
         val user = Firebase.auth.currentUser
         val uid = user?.uid!!
-        // viewModelのユーザー情報を取得するメソッドを呼ぶ
-        val userList = runBlocking {
-            userInfoRepository.getUser(uid)
-        }
+
+        val userList = runBlocking { userInfoRepository.getUser(uid) }
         return userList[0].userName!!
     }
 }
