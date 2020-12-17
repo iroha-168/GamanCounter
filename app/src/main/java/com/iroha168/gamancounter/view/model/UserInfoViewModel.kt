@@ -1,10 +1,7 @@
 package com.iroha168.gamancounter.view.model
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.iroha168.gamancounter.repository.UserInfoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,7 +9,8 @@ import kotlinx.coroutines.withContext
 
 class UserInfoViewModel : ViewModel() {
     private val _getData = MutableLiveData<List<SaveUserInfo>>()
-    val getData: LiveData<List<SaveUserInfo>> = _getData
+    val getData: LiveData<List<SaveUserInfo>>
+    get() = _getData
 
     private val repository = UserInfoRepository()
 

@@ -36,7 +36,7 @@ class CheerMailViewModel : ViewModel() {
     fun loadCheerMail(userName: String?, cheerMail: String?) = viewModelScope.launch {
         try {
             // TODO: repositoryの関数を呼び出す
-            val task = withContext(Dispatchers.Default) {repository}
+            withContext(Dispatchers.Default) {repository}
         } catch (e: Exception) {
             Log.d("ERROR", e.toString())
         }

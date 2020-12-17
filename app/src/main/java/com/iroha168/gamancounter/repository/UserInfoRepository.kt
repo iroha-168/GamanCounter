@@ -3,14 +3,18 @@ package com.iroha168.gamancounter.repository
 import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 import com.iroha168.gamancounter.view.model.SaveUserInfo
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class UserInfoRepository {
     // ユーザー情報を保存
-    suspend fun saveUser(uid: String?, userName: String, userMail: String, userPass: String): Task<Void> {
+    suspend fun saveUser(
+        uid: String?,
+        userName: String,
+        userMail: String,
+        userPass: String
+    ): Task<Void> {
         return suspendCoroutine { cont ->
             val db = FirebaseFirestore.getInstance()
             val saveUserInfo = SaveUserInfo(uid, userName, userMail, userPass)
@@ -32,7 +36,6 @@ class UserInfoRepository {
                 .whereEqualTo("uid", uid)
                 .get()
             task.addOnCompleteListener {
-                // FIXME: !!使って無理やり解決してしまったけどいいのか
                 val resultList = task.result!!.toObjects(SaveUserInfo::class.java)
                 cont.resume(resultList)
             }

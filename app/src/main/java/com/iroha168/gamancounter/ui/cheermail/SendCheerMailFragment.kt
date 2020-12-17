@@ -14,8 +14,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.CountPageActivity
 import com.iroha168.gamancounter.databinding.FragmentSendCheermailBinding
+import com.iroha168.gamancounter.repository.UserInfoRepository
 import com.iroha168.gamancounter.view.model.CheerMailViewModel
 import com.iroha168.gamancounter.view.model.UserInfoViewModel
+import kotlinx.coroutines.runBlocking
 
 class SendCheerMailFragment : Fragment() {
     private var _binding: FragmentSendCheermailBinding? = null
@@ -24,6 +26,7 @@ class SendCheerMailFragment : Fragment() {
 
     private val cheerMailViewModel: CheerMailViewModel by viewModels()
     private val userInfoViewModel: UserInfoViewModel by viewModels()
+    private val userInfoRepository = UserInfoRepository()
 
     private lateinit var auth: FirebaseAuth
 
@@ -41,6 +44,7 @@ class SendCheerMailFragment : Fragment() {
             auth = FirebaseAuth.getInstance()
             // uidからユーザー名を取得する
             val userName = getUserName()
+            Log.d("TAG", userName) // CHECK
             // 入力されたメッセージを取得
             val cheerMail: String = binding.sendCheerMailEditText.text.toString()
             // 入力されたメッセージとユーザー名をDBに登録する
@@ -57,19 +61,14 @@ class SendCheerMailFragment : Fragment() {
         _binding = null
     }
 
-    private fun getUserName() : String {
+    private fun getUserName(): String {
         // 現在ログインしているユーザーのuidを取得
         val user = Firebase.auth.currentUser
-        val uid = user?.uid
+        val uid = user?.uid!!
         // viewModelのユーザー情報を取得するメソッドを呼ぶ
-        userInfoViewModel.loadUserNameAndId(uid)
-        // LiveDataの値を受け取る
-        userInfoViewModel.getData.observe(
-            viewLifecycleOwner,
-            {Log.d("TAG", it.toString())}
-        )
-        // TODO: itからユーザー名を取り出す
-        // itからuserNameのみを取り出す方法がわからないのでいったんuserNameには"aaa"を入れてます
-        return "aaa"
+        val userList = runBlocking {
+            userInfoRepository.getUser(uid)
+        }
+        return userList[0].userName!!
     }
 }
