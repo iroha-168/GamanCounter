@@ -18,7 +18,6 @@ import com.iroha168.gamancounter.CountPageActivity
 import com.iroha168.gamancounter.databinding.FragmentSendCheermailBinding
 import com.iroha168.gamancounter.repository.UserInfoRepository
 import com.iroha168.gamancounter.view.model.CheerMailViewModel
-import com.iroha168.gamancounter.view.model.UserInfoViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -68,7 +67,7 @@ class SendCheerMailFragment : Fragment() {
     }
 
     // uidからユーザー名を取得する
-    private fun getUserName() : String {
+    private fun getUserName(): String {
         val user = Firebase.auth.currentUser
         val uid = user?.uid!!
 
