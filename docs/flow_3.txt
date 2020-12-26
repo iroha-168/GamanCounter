@@ -1,15 +1,28 @@
-[TopActivity]
-ログインチェック(画面無し)
+[splashActivity]
+アプリのロゴをスプラッシュ表示する
 --
-初回ログイン
+自動で画面が切り替わる
+==> AuthenticationActivity
+
+[AuthenticationActivity]
+SignUpとSignInのボタンが配置されている
+--
+ボタンを押してGoogle認証でSignUpかSignInする
+==>
+SelectGoogleAccountActivity
+
+[SelectGoogleAccountActivity]
+Googleアカウントを選択
+--
+アカウントを選択してSignUp
 ==> RegisterUserAccountActivity
-２回目以降のログイン
+アカウントをSignIn
 ==> HomeFragment
 
-[RegisterUserAccountActivity]
-UserIDとpassword入力欄が表示
+[RegisterUserInfoActivity]
+ユーザー名と入力欄が表示
 --
-登録ボタンを押す
+登録ボタンを押してユーザー名をFirestoreに保存
 ==> SetGoalAndMessageActivity
 
 [SetGoalAndMessageActivity]
@@ -55,6 +68,3 @@ Notificationsをクリック
 --
 ボタンをクリック
 ==> SetGoalAndMessageActivity
-
-
-

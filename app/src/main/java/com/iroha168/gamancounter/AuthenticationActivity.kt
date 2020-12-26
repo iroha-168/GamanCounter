@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -12,10 +13,19 @@ import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
 import com.iroha168.gamancounter.view.model.UserInfoViewModel
 
 class AuthenticationActivity : AppCompatActivity() {
+    // Configure google sign in
+    private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestIdToken(getString(R.string.default_web_client_id))
+        .requestEmail()
+        .build()
 
     private lateinit var binding: ActivityAuthenticationBinding
     private val viewModel: UserInfoViewModel by lazy {
         UserInfoViewModel()
+    }
+    // FIXME: GoogleSignInClientが初期化できない
+    private val googleSignInClient: GoogleSignInClient by lazy {
+        GoogleSignIn.getClient()
     }
 
     private lateinit var auth: FirebaseAuth
@@ -25,50 +35,61 @@ class AuthenticationActivity : AppCompatActivity() {
 
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
             .apply { setContentView(this.root) }
+        auth = Firebase.auth
 
         // SignUpボタンが押された時
         binding.signUpButton.setOnClickListener {
             signUp()
         }
 
-        auth = FirebaseAuth.getInstance()
-
         // SignInボタンが押された時
         binding.signInButton.setOnClickListener {
+            signIn()
+        }
+    }
 
-            // emailとpasswordとユーザー名を取り出す
-            val email = binding.enterEmail.text.toString()
-            val password = binding.enterPassword.text.toString()
-            val userName = binding.enterName.text.toString()
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+    }
 
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
+    private fun signIn() {
+
+
+
+        /*
+        val email = binding.enterEmail.text.toString()
+        val password = binding.enterPassword.text.toString()
+        val userName = binding.enterName.text.toString()
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        baseContext,
+                        "Welcome back, ${userName}!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    val intent = Intent(this, CountPageActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    if (task.exception != null) {
+                        Log.d("TAG", task.exception!!.javaClass.canonicalName)  // task.exceptionのクラス名を確認
+                        val errorMessage = when (task.exception) {
+                            is FirebaseAuthInvalidCredentialsException -> "パスワードが違います"
+                            is FirebaseAuthInvalidUserException -> "メールアドレスが違います"
+                            else -> "ログインに失敗しました"
+                        }
+
                         Toast.makeText(
                             baseContext,
-                            "Welcome back, ${userName}!",
+                            errorMessage,
                             Toast.LENGTH_LONG
                         ).show()
-                        val intent = Intent(this, CountPageActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        if (task.exception != null) {
-                            Log.d("TAG", task.exception!!.javaClass.canonicalName)  // task.exceptionのクラス名を確認
-                            val errorMessage = when (task.exception) {
-                                is FirebaseAuthInvalidCredentialsException -> "パスワードが違います"
-                                is FirebaseAuthInvalidUserException -> "メールアドレスが違います"
-                                else -> "ログインに失敗しました"
-                            }
-
-                            Toast.makeText(
-                                baseContext,
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
                     }
                 }
-        }
+
+         */
     }
 
     private fun signUp() {
