@@ -1,4 +1,4 @@
-[splashActivity]
+[SplashActivity]
 アプリのロゴをスプラッシュ表示する
 --
 自動で画面が切り替わる
@@ -8,22 +8,29 @@
 SignUpとSignInのボタンが配置されている
 --
 ボタンを押してGoogle認証でSignUpかSignInする
-==>
-SelectGoogleAccountActivity
+==> Google認証画面
 
-[SelectGoogleAccountActivity]
-Googleアカウントを選択
+[Google認証画面]
+電話番号またはメールアドレスを入力するフォームがある
 --
-アカウントを選択してSignUp
-==> RegisterUserAccountActivity
-アカウントをSignIn
+電話番号またはメールアドレスを入力
+==> Googleアカウント選択画面
+
+[Googleアカウント選択画面]
+自分の保持するGoogleアカウントが表示されている
+--
+(初回)アカウントを選択する
+==> RegisterUserInfoActivity
+(初回以降)アカウントを選択する
 ==> HomeFragment
 
+
 [RegisterUserInfoActivity]
-ユーザー名と入力欄が表示
+ユーザー名を入力するフォームと送信ボタンがある
 --
-登録ボタンを押してユーザー名をFirestoreに保存
+ユーザー名を入力してボタンを押す
 ==> SetGoalAndMessageActivity
+
 
 [SetGoalAndMessageActivity]
 目標のがまんカウントと達成した時のメッセージ入力
@@ -49,7 +56,6 @@ Notificationsをクリック
 
 [NotificationsFragment]
 受取ったチアメールを表示
-
 
 [HomeFragment]
 がまんカウントとボタン表示
