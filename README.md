@@ -3,8 +3,7 @@
 がまんカウンターは楽しくがまんしながらなりたい自分を実現するためのアプリです。何かの衝動に駆られた時、何かをがまんしないといけないと感じた時、がまんカウンターを開いてボタンを押してみましょう。
 
 【画面遷移図】
-![flow](https://raw.githubusercontent.com/wiki/iroha-168/GamanCounter/flow_3.gif)
-
+<img src="https://raw.githubusercontent.com/wiki/iroha-168/GamanCounter/flow_image.gif" width=70%>
 
 【 ホーム画面 】
 がまんの数だけがまんカウントの数字が増えていきます。
@@ -18,7 +17,7 @@
 がまんカウンターに対するご意見ご要望も運営に届けることができます。
 
 # DEMO
-![demo](https://raw.githubusercontent.com/wiki/iroha-168/GamanCounter/gamanCounter.gif)
+<img src="https://raw.githubusercontent.com/wiki/iroha-168/GamanCounter/gamanCounter.gif" width=30%>
 
 # FEATURES
 ユーザーとの関係やコミュニティーの問題に悩まなくてもよいように友達追加機能やチャット機能は作らず、応援メッセージ(チアメール)もユーザへランダムに平等に届くようにしています。誰かと競争して心理的なストレスを抱えながらがまんするのでもなく、他人と比べて承認欲求をみたすためにがまんカウントを増やすことも目的にしていません。その代わり、目標のカウントを達成したときの自分にメッセージを送信したり、目標のカウントを達成したときに過去の自分からメッセージを受け取れる機能により、過去の自分と今の自分を比べて自己の成長を感じれる仕組みにしております。楽しくのびのびがまんして、ランダムでつながる仲間と共に切磋琢磨し、なりたい自分を目指せます。
