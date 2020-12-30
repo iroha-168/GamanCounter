@@ -12,22 +12,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name="com.iroha168.gamancounter.CountPageActivity"
-            android:label="@string/title_activity_count_page">
-        </activity>
-        <activity android:name="com.iroha168.gamancounter.SendOpinionToUsActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity android:name="com.iroha168.gamancounter.AuthenticationActivity">
+
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.iroha168.gamancounter.SetGoalAndMessageActivity"></activity>
-        <activity android:name="com.iroha168.gamancounter.CongratsAfterActivity"></activity>
-        <activity android:name="com.iroha168.gamancounter.CongratsBeforeActivity"></activity>
+        <activity
+            android:name=".CountPageActivity"
+            android:label="@string/title_activity_count_page"></activity>
+        <activity
+            android:name=".SendOpinionToUsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".AuthenticationActivity">
+        </activity>
+        <activity android:name=".SetGoalAndMessageActivity" />
+        <activity android:name=".CongratsAfterActivity" />
+        <activity android:name=".CongratsBeforeActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
