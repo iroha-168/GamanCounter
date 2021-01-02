@@ -5,27 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
 import com.iroha168.gamancounter.view.model.UserInfoViewModel
 
 class AuthenticationActivity : AppCompatActivity() {
-    // Configure google sign in
-    private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestIdToken(getString(R.string.default_web_client_id))
-        .requestEmail()
-        .build()
 
     private lateinit var binding: ActivityAuthenticationBinding
     private val viewModel: UserInfoViewModel by lazy {
         UserInfoViewModel()
-    }
-    // FIXME: GoogleSignInClientが初期化できない
-    private val googleSignInClient: GoogleSignInClient by lazy {
-        GoogleSignIn.getClient()
     }
 
     private lateinit var auth: FirebaseAuth
@@ -54,7 +44,6 @@ class AuthenticationActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
-
 
 
         /*
