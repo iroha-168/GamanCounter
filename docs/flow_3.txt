@@ -1,41 +1,32 @@
 [SplashActivity]
-アプリのロゴをスプラッシュ表示する
+スプラッシュ表示する
 --
-自動で画面が切り替わる
+ログイン済
+==> CountPageActivity
+未ログイン
 ==> AuthenticationActivity
 
 [AuthenticationActivity]
-SignUpとSignInのボタンが配置されている
+
 --
-ボタンを押してGoogle認証でSignUpかSignInする
-==> Google認証画面
+Googleアカウント連携ボタンをタップ
+={StartActivityForResult}=> Google認証画面
+Firestore登録済
+==> CountPageActivity
+Firestore未登録
+==> RegisterUserInfoActivity
 
 [Google認証画面]
-電話番号またはメールアドレスを入力するフォームがある
+認証完了
 --
-電話番号またはメールアドレスを入力
-==> Googleアカウント選択画面
-
-[Googleアカウント選択画面]
-自分の保持するGoogleアカウントが表示されている
---
-(初回)アカウントを選択する
-==> RegisterUserInfoActivity
-(初回以降)アカウントを選択する
-==> HomeFragment
-
+={戻る}=> AuthenticationActivity
 
 [RegisterUserInfoActivity]
-ユーザー名を入力するフォームと送信ボタンがある
---
-ユーザー名を入力してボタンを押す
+ユーザー名を入力
 ==> SetGoalAndMessageActivity
 
-
 [SetGoalAndMessageActivity]
-目標のがまんカウントと達成した時のメッセージ入力
---
-送信ボタンを押す
+目標のがまんカウントとそれを達成した時のメッセージを入力して送信
 ==> CountPageActivity
 
 [CountPageActivity]
