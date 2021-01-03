@@ -7,7 +7,7 @@
     tools:context=".AuthenticationActivity">
 
     <ImageView
-        android:id="@+id/logo_register_user_image_view"
+        android:id="@+id/google_account_link_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
@@ -19,69 +19,21 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/logo_for_register_user" />
 
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:layout_marginBottom="300dp"
+        android:background="@color/orange"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="Googleアカウントでログイン"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
-            android:id="@+id/enter_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter e-mail"
-            android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/enter_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter password"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/enter_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter username" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/sign_in_button"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="32dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="sign in"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/sign_up_button"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="sign up"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
