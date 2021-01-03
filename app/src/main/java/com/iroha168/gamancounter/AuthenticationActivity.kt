@@ -23,6 +23,7 @@ class AuthenticationActivity : AppCompatActivity() {
         UserInfoViewModel()
     }
     private val RC_GOOGLE_SIGN_IN_CODE = 9001
+    private val CLIENT_ID = "1020518192601-934cfl5kuqid8osu9j58amtmdcu28uiv.apps.googleusercontent.com"
     private lateinit var binding: ActivityAuthenticationBinding
     private lateinit var auth: FirebaseAuth
 
@@ -32,8 +33,9 @@ class AuthenticationActivity : AppCompatActivity() {
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
             .apply { setContentView(this.root) }
 
-        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string))
+        var gso = GoogleSignInOptions
+            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(CLIENT_ID)
             .requestEmail()
             .build()
 
