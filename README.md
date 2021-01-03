@@ -3,7 +3,7 @@
 がまんカウンターは楽しくがまんしながらなりたい自分を実現するためのアプリです。何かの衝動に駆られた時、何かをがまんしないといけないと感じた時、がまんカウンターを開いてボタンを押してみましょう。
 
 【画面遷移図】
-<img src="https://raw.githubusercontent.com/wiki/iroha-168/GamanCounter/flow_image.gif" width=70%>
+<img src="https://raw.githubusercontent.com/wiki/iroha-168/GamanCounter/guit_flow_image.gif" width=70%>
 
 【 ホーム画面 】
 がまんの数だけがまんカウントの数字が増えていきます。
