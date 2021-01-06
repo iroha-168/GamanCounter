@@ -41,4 +41,19 @@ class UserInfoRepository {
             }
         }
     }
+
+    suspend fun confirmUid(uid: String?): List<SaveUserInfo> {
+        return suspendCoroutine {
+            val db = FirebaseFirestore.getInstance()
+            val task = db.collection("userInfo")
+                .whereEqualTo("uid", uid)
+                .get()
+            // FIXME: task failed
+            if (task.isSuccessful) {
+                Log.d("TAG", "task is successful")
+            } else {
+                Log.d("TAG", "failed")
+            }
+        }
+    }
 }
