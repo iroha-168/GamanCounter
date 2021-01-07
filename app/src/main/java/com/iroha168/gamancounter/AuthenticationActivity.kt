@@ -3,7 +3,6 @@ package com.iroha168.gamancounter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,7 +14,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
 import com.iroha168.gamancounter.repository.UserInfoRepository
-import com.iroha168.gamancounter.view.model.UserInfoViewModel
 import kotlinx.coroutines.runBlocking
 
 class AuthenticationActivity : AppCompatActivity() {
@@ -24,8 +22,6 @@ class AuthenticationActivity : AppCompatActivity() {
 
     private val repository = UserInfoRepository()
     private val RC_GOOGLE_SIGN_IN_CODE = 9001
-    private val CLIENT_ID =
-        "1020518192601-934cfl5kuqid8osu9j58amtmdcu28uiv.apps.googleusercontent.com"
 
     private lateinit var binding: ActivityAuthenticationBinding
 
@@ -39,7 +35,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
         var gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(CLIENT_ID)
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
@@ -54,16 +50,33 @@ class AuthenticationActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // FIXME: firebaseAuthAithGoogle()にいってくれない
         if (requestCode == RC_GOOGLE_SIGN_IN_CODE) {
-            val signInAccount = GoogleSignIn.getSignedInAccountFromIntent(data).result
-            val credential = GoogleAuthProvider.getCredential(signInAccount!!.idToken, null)
-            auth!!.signInWithCredential(credential).addOnCompleteListener {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: Exception) {
+                Log.w("TAG", "Google sign in failed", e)
+            }
+        }
+    }
+
+    private fun googleSignIn() {
+        var googleSignInIntent = googleSignInClient?.signInIntent
+        startActivityForResult(googleSignInIntent, RC_GOOGLE_SIGN_IN_CODE)
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    val uid = auth!!.currentUser!!.uid
+                    val uid = auth.currentUser!!.uid
                     Log.d("TAG", uid)
 
                     // TODO: 一致するuidを検索
-                    val result = runBlocking { repository.confirmUid(uid) }
+                    val result = runBlocking { repository.getUser(uid) }
                     val resultUid = result[0].uid
                     Log.d("TAG", result.toString())
                     Log.d("result[0]", result[0].toString())
@@ -80,12 +93,6 @@ class AuthenticationActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                 }
-            }
         }
-    }
-
-    private fun googleSignIn() {
-        var googleSignInIntent = googleSignInClient?.signInIntent
-        startActivityForResult(googleSignInIntent, RC_GOOGLE_SIGN_IN_CODE)
     }
 }
