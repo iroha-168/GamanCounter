@@ -3,17 +3,25 @@ package com.iroha168.gamancounter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.UserInfo
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
 import com.iroha168.gamancounter.repository.UserInfoRepository
+import com.iroha168.gamancounter.view.model.SaveUserInfo
+import com.iroha168.gamancounter.view.model.UserInfoViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class AuthenticationActivity : AppCompatActivity() {
@@ -22,6 +30,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
     private val repository = UserInfoRepository()
     private val RC_GOOGLE_SIGN_IN_CODE = 9001
+    private val viewModel: UserInfoViewModel by viewModels()
 
     private lateinit var binding: ActivityAuthenticationBinding
 
@@ -50,9 +59,9 @@ class AuthenticationActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // FIXME: firebaseAuthAithGoogle()にいってくれない
         if (requestCode == RC_GOOGLE_SIGN_IN_CODE) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            // FIXME: firebaseAuthWithGoogle()に入ってくれない
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
@@ -76,12 +85,16 @@ class AuthenticationActivity : AppCompatActivity() {
                     Log.d("TAG", uid)
 
                     // TODO: 一致するuidを検索
-                    val result = runBlocking { repository.getUser(uid) }
-                    val resultUid = result[0].uid
-                    Log.d("TAG", result.toString())
-                    Log.d("result[0]", result[0].toString())
-                    Log.d("result[0].uid", resultUid.toString())
+                    var result: List<SaveUserInfo>
+                    var resultUid = ""
+                    GlobalScope.launch {
+                        result = repository.getUser(uid)
+                        resultUid = result[0].uid!!
+                        Log.d("TAG", result.toString())
+                        Log.d("TAG", resultUid)
+                    }
 
+                    // FIXME: can't get resultUid outside the lifecycleScope
                     if (resultUid.isNullOrEmpty()) {
                         // 一致するuidがuserInfoなかった場合
                         val intent = Intent(this, RegisterUserInfoActivity::class.java)
