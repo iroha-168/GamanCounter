@@ -3,26 +3,20 @@ package com.iroha168.gamancounter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.UserInfo
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
 import com.iroha168.gamancounter.repository.UserInfoRepository
 import com.iroha168.gamancounter.view.model.SaveUserInfo
-import com.iroha168.gamancounter.view.model.UserInfoViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -30,7 +24,6 @@ class AuthenticationActivity : AppCompatActivity() {
 
     private val repository = UserInfoRepository()
     private val RC_GOOGLE_SIGN_IN_CODE = 9001
-    private val viewModel: UserInfoViewModel by viewModels()
 
     private lateinit var binding: ActivityAuthenticationBinding
 
@@ -61,7 +54,6 @@ class AuthenticationActivity : AppCompatActivity() {
 
         if (requestCode == RC_GOOGLE_SIGN_IN_CODE) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            // FIXME: firebaseAuthWithGoogle()に入ってくれない
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
@@ -79,33 +71,34 @@ class AuthenticationActivity : AppCompatActivity() {
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
                     val uid = auth.currentUser!!.uid
                     Log.d("TAG", uid)
 
                     // TODO: 一致するuidを検索
                     var result: List<SaveUserInfo>
-                    var resultUid = ""
                     GlobalScope.launch {
+                        // 引数のuidと一致するuidのデータを取得
                         result = repository.getUser(uid)
-                        resultUid = result[0].uid!!
                         Log.d("TAG", result.toString())
-                        Log.d("TAG", resultUid)
-                    }
+                        if (result.isNullOrEmpty()) {
+                            // 取得できなかった場合(初回ログイン)
+                            val intent = Intent(
+                                this@AuthenticationActivity,
+                                RegisterUserInfoActivity::class.java
+                            )
+                            intent.putExtra("UID", uid)
+                            startActivity(intent)
+                        } else {
+                            // 取得できた場合(２回目以降ログイン)
+                            val intent =
+                                Intent(this@AuthenticationActivity, CountPageActivity::class.java)
+                            startActivity(intent)
+                        }
 
-                    // FIXME: can't get resultUid outside the lifecycleScope
-                    if (resultUid.isNullOrEmpty()) {
-                        // 一致するuidがuserInfoなかった場合
-                        val intent = Intent(this, RegisterUserInfoActivity::class.java)
-                        intent.putExtra("UID", uid)
-                        startActivity(intent)
-                    } else {
-                        // 一致するuidがuserInfoにあった場合
-                        val intent = Intent(this, CountPageActivity::class.java)
-                        startActivity(intent)
                     }
                 }
-        }
+            }
     }
 }
