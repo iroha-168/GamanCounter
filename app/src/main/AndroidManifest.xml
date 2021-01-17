@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".SplashActivity"
+        <activity android:name=".RegisterUserInfoActivity"></activity>
+        <activity
+            android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +24,11 @@
         </activity>
         <activity
             android:name=".CountPageActivity"
-            android:label="@string/title_activity_count_page"></activity>
+            android:label="@string/title_activity_count_page" />
         <activity
             android:name=".SendOpinionToUsActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".AuthenticationActivity">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".AuthenticationActivity"></activity>
         <activity android:name=".SetGoalAndMessageActivity" />
         <activity android:name=".CongratsAfterActivity" />
         <activity android:name=".CongratsBeforeActivity" />

@@ -28,7 +28,7 @@ class UserInfoRepository {
         }
     }
 
-    // 引数のuidと一致するユーザー名を取得
+    // 引数のuidと一致するユーザー情報を取得
     suspend fun getUser(uid: String?): List<SaveUserInfo> {
         return suspendCoroutine { cont ->
             val db = FirebaseFirestore.getInstance()

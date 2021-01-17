@@ -44,10 +44,9 @@ class SendCheerMailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
         binding.sendCheerMailButton.setOnClickListener {
-            val mainHandler = Handler(Looper.getMainLooper())   // メインスレッドに紐づくLooperを取得
+            val mainHandler = Handler(Looper.getMainLooper())
             GlobalScope.launch {
                 val userName = getUserName()
-                Log.d("TAG", userName)  // CHECK
                 val cheerMail: String = binding.sendCheerMailEditText.text.toString()
                 cheerMailViewModel.saveCheerMail(userName, cheerMail)
             }

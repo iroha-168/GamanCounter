@@ -3,20 +3,29 @@ package com.iroha168.gamancounter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
-import com.iroha168.gamancounter.view.model.UserInfoViewModel
+import com.iroha168.gamancounter.repository.UserInfoRepository
+import com.iroha168.gamancounter.view.model.SaveUserInfo
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AuthenticationActivity : AppCompatActivity() {
 
+    private var googleSignInClient: GoogleSignInClient? = null
+
+    private val repository = UserInfoRepository()
+    private val RC_GOOGLE_SIGN_IN_CODE = 9001
+
     private lateinit var binding: ActivityAuthenticationBinding
-    private val viewModel: UserInfoViewModel by lazy {
-        UserInfoViewModel()
-    }
 
     private lateinit var auth: FirebaseAuth
 
@@ -25,92 +34,70 @@ class AuthenticationActivity : AppCompatActivity() {
 
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
             .apply { setContentView(this.root) }
+
+        var gso = GoogleSignInOptions
+            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
         auth = Firebase.auth
 
-        // SignUpボタンが押された時
-        binding.signUpButton.setOnClickListener {
-            signUp()
-        }
-
-        // SignInボタンが押された時
-        binding.signInButton.setOnClickListener {
-            signIn()
+        binding.googleAccountLinkButton.setOnClickListener {
+            googleSignIn()
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_GOOGLE_SIGN_IN_CODE) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: Exception) {
+                Log.w("TAG", "Google sign in failed", e)
+            }
+        }
     }
 
-    private fun signIn() {
+    private fun googleSignIn() {
+        var googleSignInIntent = googleSignInClient?.signInIntent
+        startActivityForResult(googleSignInIntent, RC_GOOGLE_SIGN_IN_CODE)
+    }
 
-
-        /*
-        val email = binding.enterEmail.text.toString()
-        val password = binding.enterPassword.text.toString()
-        val userName = binding.enterName.text.toString()
-
-        auth.signInWithEmailAndPassword(email, password)
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(
-                        baseContext,
-                        "Welcome back, ${userName}!",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    val intent = Intent(this, CountPageActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    if (task.exception != null) {
-                        Log.d("TAG", task.exception!!.javaClass.canonicalName)  // task.exceptionのクラス名を確認
-                        val errorMessage = when (task.exception) {
-                            is FirebaseAuthInvalidCredentialsException -> "パスワードが違います"
-                            is FirebaseAuthInvalidUserException -> "メールアドレスが違います"
-                            else -> "ログインに失敗しました"
+                    val uid = auth.currentUser!!.uid
+                    Log.d("TAG", uid)
+
+                    // TODO: 一致するuidを検索
+                    var result: List<SaveUserInfo>
+                    GlobalScope.launch {
+                        // 引数のuidと一致するuidのデータを取得
+                        result = repository.getUser(uid)
+                        Log.d("TAG", result.toString())
+                        if (result.isNullOrEmpty()) {
+                            // 取得できなかった場合(初回ログイン)
+                            val intent = Intent(
+                                this@AuthenticationActivity,
+                                RegisterUserInfoActivity::class.java
+                            )
+                            intent.putExtra("UID", uid)
+                            startActivity(intent)
+                        } else {
+                            // 取得できた場合(２回目以降ログイン)
+                            val intent =
+                                Intent(this@AuthenticationActivity, CountPageActivity::class.java)
+                            startActivity(intent)
                         }
 
-                        Toast.makeText(
-                            baseContext,
-                            errorMessage,
-                            Toast.LENGTH_LONG
-                        ).show()
                     }
-                }
-
-         */
-    }
-
-    private fun signUp() {
-        // emailとpasswordとユーザー名を取り出す
-        val email = binding.enterEmail.text.toString()
-        val password = binding.enterPassword.text.toString()
-        val userName = binding.enterName.text.toString()
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(
-                        baseContext,
-                        "Sign-up is successful！",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    // user登録時に自動生成されるuidを取得
-                    val user = Firebase.auth.currentUser
-                    val uid = user?.uid
-                    // ユーザー情報をDBに保存
-                    viewModel.saveUserNameAndId(uid, userName, email, password)
-                    // カウント画面に画面遷移
-                    val intent = Intent(this, CountPageActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Log.d("TAG", "failed in sign-up")
-
-                    Toast.makeText(
-                        baseContext,
-                        "ユーザー登録に失敗しました",
-                        Toast.LENGTH_LONG
-                    ).show()
                 }
             }
     }
