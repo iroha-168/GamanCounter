@@ -2,7 +2,7 @@ package com.iroha168.gamancounter
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.text.InputFilter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.iroha168.gamancounter.databinding.ActivityRegisterUserInfoBinding
@@ -19,15 +19,14 @@ class RegisterUserInfoActivity : AppCompatActivity() {
         binding = ActivityRegisterUserInfoBinding.inflate(layoutInflater)
             .apply { setContentView(this.root) }
 
+        binding.inputTextName.filters = arrayOf(InputFilter.LengthFilter(10))
 
         val userUid = intent.getSerializableExtra("UID").toString()
-        
+
         // ユーザー名とuidをFirestoreに登録する
         binding.userNameInputButton.setOnClickListener {
             val userName = binding.inputTextName.text.toString()
 
-            Log.d("user_uid", userUid)
-            Log.d("user_name", userName)
             viewModel.saveUserNameAndId(userUid, userName)
 
             val intent = Intent(this, CountPageActivity::class.java)
