@@ -70,6 +70,9 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'com.jakewharton.rxrelay3:rxrelay:3.0.0'
 
+    // Android Sarippr
+    implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
