@@ -11,13 +11,11 @@ class UserInfoRepository {
     // ユーザー情報を保存
     suspend fun saveUser(
         uid: String?,
-        userName: String,
-        userMail: String,
-        userPass: String
+        userName: String
     ): Task<Void> {
         return suspendCoroutine { cont ->
             val db = FirebaseFirestore.getInstance()
-            val saveUserInfo = SaveUserInfo(uid, userName, userMail, userPass)
+            val saveUserInfo = SaveUserInfo(uid, userName)
             val task = db.collection("userInfo")
                 .document()
                 .set(saveUserInfo)
