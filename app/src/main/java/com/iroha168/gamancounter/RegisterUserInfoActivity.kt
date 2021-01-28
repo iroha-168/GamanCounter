@@ -32,7 +32,7 @@ class RegisterUserInfoActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG).show()
             } else {
                 viewModel.saveUserNameAndId(userUid, userName)
-                val intent = Intent(this, CountPageActivity::class.java)
+                val intent = Intent(this, SetGoalAndMessageActivity::class.java)
                 startActivity(intent)
             }
         }
