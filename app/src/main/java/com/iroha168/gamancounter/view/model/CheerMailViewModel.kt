@@ -12,10 +12,11 @@ import kotlinx.coroutines.withContext
 
 class CheerMailViewModel : ViewModel() {
     // ユーザー名とチアメールを保存
-    fun saveCheerMail(userName: String?, cheerMail: String?) = viewModelScope.launch {
+    fun saveCheerMail(uid: String?, userName: String?, cheerMail: String?) = viewModelScope.launch {
         try {
             withContext(Dispatchers.Default) {
                 repository.send(
+                    uid,
                     userName,
                     cheerMail
                 )
@@ -25,18 +26,16 @@ class CheerMailViewModel : ViewModel() {
         }
     }
 
-
-
     // ユーザー名とチアメールを取得
     private val _postsData = MutableLiveData<List<SaveCheerMail>>()
     val postsData: LiveData<List<SaveCheerMail>> = _postsData
 
     private val repository = CheerMailRepository()
 
-    fun loadCheerMail(userName: String?, cheerMail: String?) = viewModelScope.launch {
+    fun loadCheerMail(uid: String?) = viewModelScope.launch {
         try {
             // TODO: repositoryの関数を呼び出す
-            withContext(Dispatchers.Default) {repository}
+            withContext(Dispatchers.Default) {repository.get(uid)}
         } catch (e: Exception) {
             Log.d("ERROR", e.toString())
         }

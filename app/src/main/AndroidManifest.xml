@@ -36,6 +36,16 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_id"
+            android:value="@string/channel_id"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.dafault_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notifications_color"
+            android:resource="@color/colorPrimary"/>
+
     </application>
 
 </manifest>

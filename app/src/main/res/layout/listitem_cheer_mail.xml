@@ -17,6 +17,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="8dp"
             android:textAlignment="textStart"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="ユーザー名" />
@@ -28,7 +29,19 @@
             android:paddingStart="8dp"
             android:paddingTop="8dp"
             android:paddingEnd="8dp"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
             tools:text="メッセージ" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="0dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textAlignment="textEnd"
+            tools:text="日付" />
     </LinearLayout>
 </LinearLayout>
