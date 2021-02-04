@@ -46,8 +46,9 @@ class SendCheerMailFragment : Fragment() {
             val mainHandler = Handler(Looper.getMainLooper())
             GlobalScope.launch {
                 val userName = getUserName()
+                val uid = Firebase.auth.currentUser?.uid
                 val cheerMail: String = binding.sendCheerMailEditText.text.toString()
-                cheerMailViewModel.saveCheerMail(userName, cheerMail)
+                cheerMailViewModel.saveCheerMail(uid, userName, cheerMail)
             }
 
             mainHandler.post {

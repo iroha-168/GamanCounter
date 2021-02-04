@@ -10,14 +10,32 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.iroha168.gamancounter.repository.TestNotificationRepository
+import kotlinx.coroutines.runBlocking
+import java.util.*
 
 class BackgroundServiceClass : FirebaseMessagingService() {
+    private lateinit var auth: FirebaseAuth
+    private val repository = TestNotificationRepository()
+
     // TODO : 登録トークンを取得してFirestoreにuidと一緒に登録
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.d("TAG", "Refreshed token: $token") // CHECK:トークンが取得できているか確認
+
+        // uidを取得、uidとtokenが取得されているか確認
+        val uid = auth.currentUser!!.uid
+        Log.d("TOKEN", "Refreshed token: $token")
+        Log.d("UID", "uid: $uid")
+
+        // uidとtokenをFirestore(testNotification)に登録
+        runBlocking {
+            repository.save(uid, token)
+        }.addOnCompleteListener {
+            Log.d("TAG", "uid and token are saved")
+        }
 
         // チャンネルidを設定
         addChannelId()
@@ -63,7 +81,14 @@ class BackgroundServiceClass : FirebaseMessagingService() {
                 .setSound(defaultSoundUri)
 
         // TODO : 通知を実施
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val uuid = UUID.randomUUID().hashCode()
+        notificationManager.notify(uuid, notificationBuilder.build())
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationBuilder.setChannelId(resources.getString(R.string.channel_id))
+        }
     }
 
     // チャンネルの設定
@@ -82,6 +107,4 @@ class BackgroundServiceClass : FirebaseMessagingService() {
             manager.createNotificationChannel(channel)
         }
     }
-
-
 }
