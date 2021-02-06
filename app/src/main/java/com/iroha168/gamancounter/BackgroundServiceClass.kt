@@ -10,32 +10,19 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.iroha168.gamancounter.repository.TestNotificationRepository
-import kotlinx.coroutines.runBlocking
 import java.util.*
 
 class BackgroundServiceClass : FirebaseMessagingService() {
-    private lateinit var auth: FirebaseAuth
-    private val repository = TestNotificationRepository()
 
-    // TODO : 登録トークンを取得してFirestoreにuidと一緒に登録
     override fun onNewToken(token: String) {
         super.onNewToken(token)
 
-        // uidを取得、uidとtokenが取得されているか確認
-        val uid = auth.currentUser!!.uid
+        // トークンを取得してSharedPreferenceに保存
         Log.d("TOKEN", "Refreshed token: $token")
-        Log.d("UID", "uid: $uid")
-
-        // uidとtokenをFirestore(testNotification)に登録
-        runBlocking {
-            repository.save(uid, token)
-        }.addOnCompleteListener {
-            Log.d("TAG", "uid and token are saved")
-        }
+        val sharedPreferences = getSharedPreferences("SAVE_TOKEN", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("TOKEN", token).apply()
 
         // チャンネルidを設定
         addChannelId()

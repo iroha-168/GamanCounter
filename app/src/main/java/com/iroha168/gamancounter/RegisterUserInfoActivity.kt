@@ -31,6 +31,7 @@ class RegisterUserInfoActivity : AppCompatActivity() {
                     "ユーザー名は１文字以上３０文字以内で入力してください",
                     Toast.LENGTH_LONG).show()
             } else {
+                // uidとユーザー名をFirestoreに保存
                 viewModel.saveUserNameAndId(userUid, userName)
                 val intent = Intent(this, SetGoalAndMessageActivity::class.java)
                 startActivity(intent)

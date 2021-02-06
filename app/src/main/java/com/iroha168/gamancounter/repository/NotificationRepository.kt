@@ -6,7 +6,7 @@ import com.iroha168.gamancounter.view.model.TestNotificationDataClass
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class TestNotificationRepository {
+class NotificationRepository {
     // uidとトークンを登録
     suspend fun save(uid: String?, token: String?): Task<Void> {
         return suspendCoroutine { cont ->

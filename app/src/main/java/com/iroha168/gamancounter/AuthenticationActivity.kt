@@ -1,5 +1,6 @@
 package com.iroha168.gamancounter
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,16 +14,20 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
+import com.iroha168.gamancounter.repository.NotificationRepository
 import com.iroha168.gamancounter.repository.UserInfoRepository
 import com.iroha168.gamancounter.view.model.SaveUserInfo
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class AuthenticationActivity : AppCompatActivity() {
 
     private var googleSignInClient: GoogleSignInClient? = null
 
-    private val repository = UserInfoRepository()
+    private val userInfoRepository = UserInfoRepository()
+    private val notificationRepository = NotificationRepository()
+
     private val RC_GOOGLE_SIGN_IN_CODE = 9001
 
     private lateinit var binding: ActivityAuthenticationBinding
@@ -73,14 +78,22 @@ class AuthenticationActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    // uidを取得
                     val uid = auth.currentUser!!.uid
                     Log.d("TAG", uid)
+
+                    // SharedPreferenceからトークンを取り出す
+                    val sharedPreferences = getSharedPreferences("SAVE_TOKEN", Context.MODE_PRIVATE)
+                    val token = sharedPreferences.getString("TOKEN", "No token")
+                    Log.d("TOKEN", token!!)
+                    // uidとトークンをFirestoreに保存
+                    runBlocking { notificationRepository.save(uid, token) }
 
                     // TODO: 一致するuidを検索
                     var result: List<SaveUserInfo>
                     GlobalScope.launch {
                         // 引数のuidと一致するuidのデータを取得
-                        result = repository.getUser(uid)
+                        result = userInfoRepository.getUser(uid)
                         Log.d("TAG", result.toString())
                         if (result.isNullOrEmpty()) {
                             // 取得できなかった場合(初回ログイン)
@@ -96,7 +109,6 @@ class AuthenticationActivity : AppCompatActivity() {
                                 Intent(this@AuthenticationActivity, CountPageActivity::class.java)
                             startActivity(intent)
                         }
-
                     }
                 }
             }
