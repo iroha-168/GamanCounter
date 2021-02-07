@@ -87,7 +87,11 @@ class AuthenticationActivity : AppCompatActivity() {
                     val token = sharedPreferences.getString("TOKEN", "No token")
                     Log.d("TOKEN", token!!)
                     // uidとトークンをFirestoreに保存
-                    runBlocking { notificationRepository.save(uid, token) }
+                    Log.d("TOKEN", "saving token")
+                    GlobalScope.launch {
+                        notificationRepository.save(uid, token)
+                    }
+                    Log.d("TOKEN", "Token save completed")
 
                     // TODO: 一致するuidを検索
                     var result: List<SaveUserInfo>

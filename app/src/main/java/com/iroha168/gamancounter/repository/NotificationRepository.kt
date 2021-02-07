@@ -1,5 +1,6 @@
 package com.iroha168.gamancounter.repository
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import com.iroha168.gamancounter.view.model.TestNotificationDataClass
@@ -15,9 +16,12 @@ class NotificationRepository {
             val task = db.collection("testNotification")
                 .document()
                 .set(testNotification)
+            Log.d("TOKEN", "about to enter addOnCompleteListener")
             task.addOnCompleteListener {
+                Log.d("TOKEN", "in the addOnCompleteListener")
                 cont.resume(it)
             }
+            Log.d("TOKEN", "finish addOnCompleteListener")
         }
     }
 }
