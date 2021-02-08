@@ -33,9 +33,26 @@
         <activity android:name=".CongratsAfterActivity" />
         <activity android:name=".CongratsBeforeActivity" />
 
+        <service android:name=".BackgroundServiceClass"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_id"
+            android:value="@string/channel_id"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.dafault_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notifications_color"
+            android:resource="@color/colorPrimary"/>
+
     </application>
 
 </manifest>

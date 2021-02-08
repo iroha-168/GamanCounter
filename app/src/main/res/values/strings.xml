@@ -8,4 +8,6 @@
     <string name="text_in_count_button">がまん</string>
     <string name="text_first_message_hint">例：自分、よく頑張った！</string>
     <string name="text_in_button_first_message">送信</string>
+    <string name="channel_id">channel_id_sample</string>
+    <string name="channel_name">sample</string>
 </resources>

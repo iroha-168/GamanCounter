@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,8 +46,9 @@ class SendCheerMailFragment : Fragment() {
             val mainHandler = Handler(Looper.getMainLooper())
             GlobalScope.launch {
                 val userName = getUserName()
+                val uid = Firebase.auth.currentUser?.uid
                 val cheerMail: String = binding.sendCheerMailEditText.text.toString()
-                cheerMailViewModel.saveCheerMail(userName, cheerMail)
+                cheerMailViewModel.saveCheerMail(uid, userName, cheerMail)
             }
 
             mainHandler.post {
