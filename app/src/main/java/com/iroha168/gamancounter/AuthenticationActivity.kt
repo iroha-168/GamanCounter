@@ -16,10 +16,9 @@ import com.google.firebase.ktx.Firebase
 import com.iroha168.gamancounter.databinding.ActivityAuthenticationBinding
 import com.iroha168.gamancounter.repository.NotificationRepository
 import com.iroha168.gamancounter.repository.UserInfoRepository
-import com.iroha168.gamancounter.view.model.SaveUserInfo
+import com.iroha168.gamancounter.view.model.UserInfoDataClass
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -94,7 +93,7 @@ class AuthenticationActivity : AppCompatActivity() {
                     Log.d("TOKEN", "Token save completed")
 
                     // TODO: 一致するuidを検索
-                    var result: List<SaveUserInfo>
+                    var result: List<UserInfoDataClass>
                     GlobalScope.launch {
                         // 引数のuidと一致するuidのデータを取得
                         result = userInfoRepository.getUser(uid)

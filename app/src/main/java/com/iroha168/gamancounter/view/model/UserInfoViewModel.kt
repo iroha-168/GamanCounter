@@ -8,8 +8,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class UserInfoViewModel : ViewModel() {
-    private val _getData = MutableLiveData<List<SaveUserInfo>>()
-    val getData: LiveData<List<SaveUserInfo>>
+    private val _getData = MutableLiveData<List<UserInfoDataClass>>()
+    val getData: LiveData<List<UserInfoDataClass>>
     get() = _getData
 
     private val repository = UserInfoRepository()
