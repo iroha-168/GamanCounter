@@ -26,8 +26,7 @@
             android:name=".CountPageActivity"
             android:label="@string/title_activity_count_page" />
         <activity
-            android:name=".SendOpinionToUsActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:name=".SendOpinionToUsActivity" />
         <activity android:name=".AuthenticationActivity"></activity>
         <activity android:name=".SetGoalAndMessageActivity" />
         <activity android:name=".CongratsAfterActivity" />

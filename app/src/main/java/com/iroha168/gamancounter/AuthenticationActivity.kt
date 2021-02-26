@@ -56,6 +56,9 @@ class AuthenticationActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        Log.d("REQUEST_CODE", requestCode.toString())
+        Log.d("RC_GOOGLE_SIGN_IN_CODE", RC_GOOGLE_SIGN_IN_CODE.toString())
+
         if (requestCode == RC_GOOGLE_SIGN_IN_CODE) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -88,7 +91,8 @@ class AuthenticationActivity : AppCompatActivity() {
                     // uidとトークンをFirestoreに保存
                     Log.d("TOKEN", "saving token")
                     GlobalScope.launch {
-                        notificationRepository.save(uid, token)
+                        val randomNumber = Math.random()
+                        notificationRepository.save(randomNumber, uid, token)
                     }
                     Log.d("TOKEN", "Token save completed")
 

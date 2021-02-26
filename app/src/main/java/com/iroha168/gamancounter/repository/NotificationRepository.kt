@@ -8,11 +8,11 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class NotificationRepository {
-    // uidとトークンを登録
-    suspend fun save(uid: String?, token: String?): Task<Void> {
+    // random、uid、トークンを登録
+    suspend fun save(randomNumber: Double?, uid: String?, token: String?): Task<Void> {
         return suspendCoroutine { cont ->
             val db = FirebaseFirestore.getInstance()
-            val testNotification = TestNotificationDataClass(uid, token)
+            val testNotification = TestNotificationDataClass(randomNumber, uid, token)
             val task = db.collection("testNotification")
                 .document()
                 .set(testNotification)
