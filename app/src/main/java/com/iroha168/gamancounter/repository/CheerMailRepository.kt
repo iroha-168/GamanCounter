@@ -11,8 +11,10 @@ class CheerMailRepository {
     suspend fun send(uid: String?, userName: String?, cheerMail: String?): Task<Void> {
         return suspendCoroutine { cont ->
             val db = FirebaseFirestore.getInstance()
-            val saveCheerMail = CheerMailDataClass(uid, userName, cheerMail)
+            val saveCheerMail = CheerMailDataClass(userName, cheerMail)
             val task = db.collection("cheerMail")
+                .document(uid!!)
+                .collection("sentMail")
                 .document()
                 .set(saveCheerMail)
             task.addOnCompleteListener {
