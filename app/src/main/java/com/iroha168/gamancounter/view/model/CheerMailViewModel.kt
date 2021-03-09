@@ -12,13 +12,14 @@ import kotlinx.coroutines.withContext
 
 class CheerMailViewModel : ViewModel() {
     // ユーザー名とチアメールを保存
-    fun saveCheerMail(uid: String?, userName: String?, cheerMail: String?) = viewModelScope.launch {
+    fun saveCheerMail(messageId: String?, message: String?, uid: String?, userName: String?) = viewModelScope.launch {
         try {
             withContext(Dispatchers.Default) {
                 repository.send(
+                    messageId,
+                    message,
                     uid,
-                    userName,
-                    cheerMail
+                    userName
                 )
             }
         } catch (e: Exception) {

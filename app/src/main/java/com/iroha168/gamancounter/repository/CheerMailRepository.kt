@@ -1,5 +1,6 @@
 package com.iroha168.gamancounter.repository
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import com.iroha168.gamancounter.view.model.CheerMailDataClass
@@ -8,13 +9,16 @@ import kotlin.coroutines.suspendCoroutine
 
 class CheerMailRepository {
     // チアメールを保存
-    suspend fun send(uid: String?, userName: String?, cheerMail: String?): Task<Void> {
+    suspend fun send(
+        messageId: String?,
+        message: String?,
+        uid: String?,
+        userName: String?
+    ): Task<Void> {
         return suspendCoroutine { cont ->
+            val saveCheerMail = CheerMailDataClass(messageId, message, uid, userName)
             val db = FirebaseFirestore.getInstance()
-            val saveCheerMail = CheerMailDataClass(userName, cheerMail)
             val task = db.collection("cheerMail")
-                .document(uid!!)
-                .collection("sentMail")
                 .document()
                 .set(saveCheerMail)
             task.addOnCompleteListener {

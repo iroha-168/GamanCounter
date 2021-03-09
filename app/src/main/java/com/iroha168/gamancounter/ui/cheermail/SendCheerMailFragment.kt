@@ -17,9 +17,11 @@ import com.iroha168.gamancounter.CountPageActivity
 import com.iroha168.gamancounter.databinding.FragmentSendCheermailBinding
 import com.iroha168.gamancounter.repository.UserInfoRepository
 import com.iroha168.gamancounter.view.model.CheerMailViewModel
+import kotlinx.android.synthetic.main.listitem_cheer_mail.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.*
 
 class SendCheerMailFragment : Fragment() {
     private var _binding: FragmentSendCheermailBinding? = null
@@ -45,10 +47,11 @@ class SendCheerMailFragment : Fragment() {
         binding.sendCheerMailButton.setOnClickListener {
             val mainHandler = Handler(Looper.getMainLooper())
             GlobalScope.launch {
-                val userName = getUserName()
+                val messageId = UUID.randomUUID().toString()
+                val message: String = binding.sendCheerMailEditText.text.toString()
                 val uid = Firebase.auth.currentUser?.uid
-                val cheerMail: String = binding.sendCheerMailEditText.text.toString()
-                cheerMailViewModel.saveCheerMail(uid, userName, cheerMail)
+                val userName = getUserName()
+                cheerMailViewModel.saveCheerMail(messageId, message, uid, userName)
             }
 
             mainHandler.post {
