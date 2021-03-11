@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/shape_rounded_corners_5dp"
         android:text="開封"
         android:textColor="@android:color/white"
         android:textSize="24sp"

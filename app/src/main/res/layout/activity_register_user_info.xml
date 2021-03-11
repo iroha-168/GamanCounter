@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/shape_rounded_corners_5dp"
             android:text="決定"
             android:textColor="@android:color/white"
             android:textSize="18sp"

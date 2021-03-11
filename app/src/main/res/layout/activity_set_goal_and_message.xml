@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:background="@color/orange"
+        android:background="@drawable/shape_rounded_corners_5dp"
         android:text="@string/text_in_button_first_message"
         android:textSize="18sp"
         android:textStyle="bold"

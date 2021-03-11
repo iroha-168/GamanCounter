@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/shape_rounded_corners_5dp"
             android:text="送信"
             android:textColor="@android:color/white"
             android:textSize="18sp"

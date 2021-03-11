@@ -29,7 +29,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginBottom="42dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/shape_rounded_corners_5dp"
         android:scaleType="center"
         android:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
