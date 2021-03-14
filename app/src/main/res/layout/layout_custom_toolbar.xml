@@ -21,9 +21,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/colorPrimary"
-        android:gravity="center"
+        android:paddingTop="12dp"
         android:text="TextView"
-        android:textAlignment="textStart"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
