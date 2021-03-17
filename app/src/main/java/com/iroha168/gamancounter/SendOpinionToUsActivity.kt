@@ -1,15 +1,16 @@
 package com.iroha168.gamancounter
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.iroha168.gamancounter.databinding.ActivitySendOpinionToUsBinding
 import com.iroha168.gamancounter.view.ToolBarCustomView
 import com.iroha168.gamancounter.view.ToolBarCustomViewDelegate
-import kotlinx.android.synthetic.main.activity_send_opinion_to_us.*
-import kotlinx.android.synthetic.main.activity_set_goal_and_message.*
 
 class SendOpinionToUsActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
 
@@ -25,17 +26,6 @@ class SendOpinionToUsActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         supportActionBar?.hide()
 
         layout()
-
-        // Glideを利用してGIFを画面に表示させる
-        val url: String = "https://docs.google.com/forms/d/e/1FAIpQLSe3plWZsaf8nc_j1YUqUt9Zx_1znPA7-6XG-FNMR2xyzewLcg/viewform?usp=sf_link"
-        Glide
-            .with(this)
-            .load(url)
-            .thumbnail(
-                Glide.with(this)
-                     .load(R.raw.nekotoaruku_touka)
-            )
-            .into(binding.imageViewLoadingGif)
     }
 
     override fun onClickedLeftButton() {
@@ -55,8 +45,36 @@ class SendOpinionToUsActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         )
         layout.addView(customToolBarView)
 
-//        //WebViewの設定
-//        val url: String = "https://docs.google.com/forms/d/e/1FAIpQLSe3plWZsaf8nc_j1YUqUt9Zx_1znPA7-6XG-FNMR2xyzewLcg/viewform?usp=sf_link"
-//        web_view.loadUrl(url)
+        // WebViewの設定
+        val googleFormUrl: String = "https://docs.google.com/forms/d/e/1FAIpQLSe3plWZsaf8nc_j1YUqUt9Zx_1znPA7-6XG-FNMR2xyzewLcg/viewform?usp=sf_link"
+        binding.webViewGoogleForm.loadUrl(googleFormUrl)
+
+        binding.webViewGoogleForm.webViewClient = object : WebViewClient() {
+
+            // ローディング時に呼ばれる
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+
+                // Glideを利用してローディング中にGIFを表示させる
+                Glide
+                    .with(this@SendOpinionToUsActivity)
+                    .load(R.raw.nekotoaruku_touka)
+                    .thumbnail(
+                        Glide.with(this@SendOpinionToUsActivity)
+                            .load(R.raw.nekotoaruku_touka)
+                    )
+                    .into(binding.imageViewLoading)
+            }
+
+            // ローディング終了時に呼ばれる
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+
+                // gifを表示するimageViewを取り除く
+                binding.frameLayout.removeView(binding.imageViewLoading)
+            }
+        }
     }
 }
+
+

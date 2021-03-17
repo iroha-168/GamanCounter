@@ -17,20 +17,25 @@
             android:layout_height="50dp"
             android:orientation="vertical" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <WebView
+            android:id="@+id/web_view_google_form"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/image_view_loading_gif"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <FrameLayout
+                android:id="@+id/frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+            </FrameLayout>
+        </WebView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
