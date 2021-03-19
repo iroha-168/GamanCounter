@@ -45,25 +45,19 @@ class SendOpinionToUsActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         )
         layout.addView(customToolBarView)
 
-        // WebViewの設定
-        val googleFormUrl: String = "https://docs.google.com/forms/d/e/1FAIpQLSe3plWZsaf8nc_j1YUqUt9Zx_1znPA7-6XG-FNMR2xyzewLcg/viewform?usp=sf_link"
-        binding.webViewGoogleForm.loadUrl(googleFormUrl)
+        // Glideでgifを表示させる
+        var loadImage = Glide
+            .with(this)
+            .load(R.raw.nekotoaruku_touka)
 
         binding.webViewGoogleForm.webViewClient = object : WebViewClient() {
-
             // ローディング時に呼ばれる
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
 
                 // Glideを利用してローディング中にGIFを表示させる
-                Glide
-                    .with(this@SendOpinionToUsActivity)
-                    .load(R.raw.nekotoaruku_touka)
-                    .thumbnail(
-                        Glide.with(this@SendOpinionToUsActivity)
-                            .load(R.raw.nekotoaruku_touka)
-                    )
-                    .into(binding.imageViewLoading)
+                loadImage.into(binding.imageViewLoading)
+
             }
 
             // ローディング終了時に呼ばれる
@@ -74,6 +68,11 @@ class SendOpinionToUsActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
                 binding.frameLayout.removeView(binding.imageViewLoading)
             }
         }
+
+        // WebViewの設定
+        val googleFormUrl: String = "https://docs.google.com/forms/d/e/1FAIpQLSe3plWZsaf8nc_j1YUqUt9Zx_1znPA7-6XG-FNMR2xyzewLcg/viewform?usp=sf_link"
+        binding.webViewGoogleForm.loadUrl(googleFormUrl)
+
     }
 }
 
