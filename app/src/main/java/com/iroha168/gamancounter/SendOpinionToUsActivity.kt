@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.iroha168.gamancounter.databinding.ActivitySendOpinionToUsBinding
 import com.iroha168.gamancounter.view.ToolBarCustomView
 import com.iroha168.gamancounter.view.ToolBarCustomViewDelegate
+import java.util.*
 
 class SendOpinionToUsActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
 
@@ -72,7 +73,6 @@ class SendOpinionToUsActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         // WebViewの設定
         val googleFormUrl: String = "https://docs.google.com/forms/d/e/1FAIpQLSe3plWZsaf8nc_j1YUqUt9Zx_1znPA7-6XG-FNMR2xyzewLcg/viewform?usp=sf_link"
         binding.webViewGoogleForm.loadUrl(googleFormUrl)
-
     }
 }
 
