@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegisterUserInfoActivity"></activity>
+        <activity android:name=".ShowLoadingGifActivity"></activity>
+        <activity android:name=".RegisterUserInfoActivity" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -25,14 +26,14 @@
         <activity
             android:name=".CountPageActivity"
             android:label="@string/title_activity_count_page" />
-        <activity
-            android:name=".SendOpinionToUsActivity" />
-        <activity android:name=".AuthenticationActivity"></activity>
+        <activity android:name=".SendOpinionToUsActivity" />
+        <activity android:name=".AuthenticationActivity" />
         <activity android:name=".SetGoalAndMessageActivity" />
         <activity android:name=".CongratsAfterActivity" />
         <activity android:name=".CongratsBeforeActivity" />
 
-        <service android:name=".BackgroundServiceClass"
+        <service
+            android:name=".BackgroundServiceClass"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -44,14 +45,13 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_id"
-            android:value="@string/channel_id"/>
+            android:value="@string/channel_id" />
         <meta-data
             android:name="com.google.firebase.messaging.dafault_notification_icon"
-            android:resource="@drawable/ic_launcher_foreground"/>
+            android:resource="@drawable/ic_launcher_foreground" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notifications_color"
-            android:resource="@color/colorPrimary"/>
-
+            android:resource="@color/colorPrimary" />
     </application>
 
 </manifest>

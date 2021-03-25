@@ -15,14 +15,27 @@
             android:id="@+id/container_for_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:orientation="vertical" />
 
         <WebView
-            android:id="@+id/web_view"
+            android:id="@+id/web_view_google_form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+            </FrameLayout>
+        </WebView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
